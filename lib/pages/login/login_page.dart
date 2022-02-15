@@ -1,5 +1,6 @@
 import 'package:amikom_wan/pages/widget/app_button.dart';
 import 'package:amikom_wan/pages/widget/app_form_field.dart';
+import 'package:amikom_wan/routes.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +40,7 @@ class LoginPage extends StatelessWidget {
                   AppButton(
                     text: 'Login',
                     onPressed: () {
+                      Navigator.pushNamed(context, Routes.home);
                       if (_formKey.currentState!.validate()) {}
                     },
                   )
