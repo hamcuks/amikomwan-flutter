@@ -1,8 +1,11 @@
-import 'package:amikom_wan/pages/home/home_page.dart';
-import 'package:amikom_wan/routes.dart';
+import 'pages/home/home_page.dart';
+import 'pages/khs/khs_page.dart';
+import 'pages/transkrip/transkrip_page.dart';
+import 'routes.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/login/login_page.dart';
+import 'pages/schedule/schedule_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +29,13 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => LoginPage());
           case (Routes.home):
             return MaterialPageRoute(builder: (context) => HomePage());
+          case (Routes.schedule):
+            return MaterialPageRoute(builder: (context) => SchedulePage());
+          case (Routes.khs):
+            return MaterialPageRoute(builder: (context) => const KHSPage());
+          case (Routes.transkrip):
+            return MaterialPageRoute(
+                builder: (context) => const TranskripPage());
           default:
             return MaterialPageRoute(builder: (context) => LoginPage());
         }

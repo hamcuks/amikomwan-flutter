@@ -1,4 +1,5 @@
-import 'package:amikom_wan/pages/widget/app_menu_item.dart';
+import '../widget/app_menu_item.dart';
+import '../../routes.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,7 @@ class HomePage extends StatelessWidget {
                       const SizedBox(height: 32),
                       _ScheduleSection(controller: _controller),
                       const SizedBox(height: 32),
-                      _AppMenuSection()
+                      const _AppMenuSection()
                     ],
                   ),
                 )
@@ -104,12 +105,12 @@ class _AppMenuSection extends StatelessWidget {
             AppMenuItem(
               menuName: 'Jadwal',
               icon: FeatherIcons.calendar,
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, Routes.schedule),
             ),
             AppMenuItem(
               menuName: 'KHS',
               icon: FeatherIcons.fileMinus,
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, Routes.khs),
             ),
           ],
         ),
@@ -120,7 +121,7 @@ class _AppMenuSection extends StatelessWidget {
             AppMenuItem(
               menuName: 'Transkrip Nilai',
               icon: FeatherIcons.fileText,
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, Routes.transkrip),
             ),
             AppMenuItem(
               menuName: 'KTM',
@@ -179,7 +180,7 @@ class _ScheduleSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             itemCount: 3,
-            itemBuilder: (context, i) => ScheduleCard(),
+            itemBuilder: (context, i) => const ScheduleCard(),
           ),
         )
       ],
