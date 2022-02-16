@@ -8,3 +8,17 @@ abstract class AuthState extends Equatable {
 }
 
 class AuthInitial extends AuthState {}
+
+class AuthLoading extends AuthState {}
+
+class AuthSuccess extends AuthState {}
+
+class AuthError extends AuthState {
+  String message;
+
+  AuthError(this.message);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [message];
+}

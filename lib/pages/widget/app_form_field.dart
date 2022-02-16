@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppFormField extends StatefulWidget {
   final String hintText;
   final IconData? icon;
-  final TextInputType inputType;
+  final bool secret;
   final TextEditingController controller;
 
   const AppFormField({
@@ -11,7 +11,7 @@ class AppFormField extends StatefulWidget {
     required this.controller,
     this.hintText = 'Field Name',
     this.icon,
-    this.inputType = TextInputType.text,
+    this.secret = false,
   }) : super(key: key);
 
   @override
@@ -31,7 +31,7 @@ class _AppFormFieldState extends State<AppFormField> {
       controller: widget.controller,
       validator: (value) =>
           value!.isEmpty ? '${widget.hintText} Harus Diisi' : null,
-      keyboardType: widget.inputType,
+      obscureText: widget.secret,
       decoration: InputDecoration(
         prefixIcon: Icon(widget.icon, size: 18),
         prefixStyle: const TextStyle(color: Color(0xFFA39CB8)),

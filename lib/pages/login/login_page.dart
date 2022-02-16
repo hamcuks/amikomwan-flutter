@@ -1,3 +1,7 @@
+import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/src/provider.dart';
+
 import '../widget/app_button.dart';
 import '../widget/app_form_field.dart';
 import '../../routes.dart';
@@ -35,13 +39,40 @@ class LoginPage extends StatelessWidget {
                     controller: _passwordController,
                     hintText: 'Password',
                     icon: FeatherIcons.key,
+                    secret: true,
                   ),
                   const SizedBox(height: 48),
-                  AppButton(
-                    text: 'Login',
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, Routes.home);
-                      if (_formKey.currentState!.validate()) {}
+                  BlocConsumer<AuthCubit, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthSuccess) {
+                        Navigator.pushReplacementNamed(context, Routes.home);
+                      } else if (state is AuthError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message),
+                          ),
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is AuthLoading) {
+                        return AppButton(
+                          text: 'Login',
+                          isLoading: true,
+                          onPressed: () {},
+                        );
+                      } else {
+                        return AppButton(
+                          text: 'Login',
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<AuthCubit>().login(
+                                  _npmController.text,
+                                  _passwordController.text);
+                            }
+                          },
+                        );
+                      }
                     },
                   )
                 ],
