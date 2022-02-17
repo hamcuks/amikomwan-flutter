@@ -241,7 +241,7 @@ class _ScheduleSection extends StatelessWidget {
             ),
             const Spacer(),
             IconButton(
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pushNamed(Routes.schedule),
               color: const Color(0xFFFAFAFA),
               icon: const Icon(CupertinoIcons.arrow_right),
             )
