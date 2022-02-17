@@ -1,3 +1,8 @@
+import 'dart:developer';
+
+import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../widget/mata_kuliah_detail_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,14 +56,36 @@ class SchedulePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  itemCount: 5,
-                  itemBuilder: (context, i) => const MataKuliahDetail(),
-                ),
-              )
+              BlocBuilder<ScheduleCubit, ScheduleState>(
+                  builder: (context, state) {
+                log(state.toString());
+                if (state is ScheduleSuccess) {
+                  if (state.data.isEmpty) {
+                    return const Expanded(
+                      child: Center(
+                        child: Text('Tidak Ada Jadwal'),
+                      ),
+                    );
+                  }
+
+                  return Expanded(
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      itemCount: state.data.length,
+                      itemBuilder: (context, i) => MataKuliahDetail(
+                        data: state.data[i],
+                      ),
+                    ),
+                  );
+                }
+
+                return const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              })
             ],
           ),
         ],

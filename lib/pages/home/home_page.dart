@@ -1,6 +1,10 @@
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
+import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
 import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
+import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
+import 'package:amikom_wan/data/repository/schedule/schedule_repository.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widget/app_menu_item.dart';
@@ -30,7 +34,7 @@ class HomePage extends StatelessWidget {
               children: [
                 Container(
                   width: double.maxFinite,
-                  height: MediaQuery.of(context).size.height * .5,
+                  height: MediaQuery.of(context).size.height * .43,
                   color: const Color(0xFF432A79),
                 ),
                 Padding(
@@ -80,11 +84,23 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 32),
-                      const LiveClassCard(
-                        kelas: 'Pemrograman Web lanjut',
-                      ),
-                      const SizedBox(height: 32),
-                      _ScheduleSection(controller: _controller),
+                      // const LiveClassCard(
+                      //   kelas: 'Pemrograman Web lanjut',
+                      // ),
+                      // const SizedBox(height: 32),
+                      BlocBuilder<ScheduleCubit, ScheduleState>(
+                          builder: (context, state) {
+                        if (state is ScheduleSuccess) {
+                          return _ScheduleSection(
+                            controller: _controller,
+                            data: state.data,
+                          );
+                        }
+
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }),
                       const SizedBox(height: 32),
                       const _AppMenuSection()
                     ],
@@ -130,13 +146,16 @@ class _AppMenuSection extends StatelessWidget {
             AppMenuItem(
               menuName: 'Jadwal',
               icon: FeatherIcons.calendar,
-              onTap: () => Navigator.pushNamed(context, Routes.schedule),
+              onTap: () {
+                // context.read<ScheduleCubit>().get();
+                Navigator.pushNamed(context, Routes.schedule);
+              },
             ),
             AppMenuItem(
               menuName: 'KHS',
               icon: FeatherIcons.fileMinus,
               onTap: () {
-                context.read<KhsCubit>().get();
+                // context.read<KhsCubit>().get();
                 Navigator.pushNamed(context, Routes.khs);
               },
             ),
@@ -150,7 +169,7 @@ class _AppMenuSection extends StatelessWidget {
               menuName: 'Transkrip Nilai',
               icon: FeatherIcons.fileText,
               onTap: () {
-                context.read<TranskripCubit>().get();
+                // context.read<TranskripCubit>().get();
                 Navigator.pushNamed(context, Routes.transkrip);
               },
             ),
@@ -160,10 +179,10 @@ class _AppMenuSection extends StatelessWidget {
               onTap: () {},
             ),
             AppMenuItem(
-              menuName: 'Mahasiswa',
+              menuName: 'Profile',
               icon: FeatherIcons.user,
               onTap: () {
-                context.read<ProfileCubit>().get();
+                // context.read<ProfileCubit>().get();
                 Navigator.pushNamed(context, Routes.profile);
               },
             ),
@@ -175,9 +194,13 @@ class _AppMenuSection extends StatelessWidget {
 }
 
 class _ScheduleSection extends StatelessWidget {
+  final List<ScheduleModel> data;
+  final PageController controller;
+
   const _ScheduleSection({
     Key? key,
-    required PageController controller,
+    required this.data,
+    required this.controller,
   })  : _controller = controller,
         super(key: key);
 
@@ -207,16 +230,42 @@ class _ScheduleSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        SizedBox(
-          height: 200,
-          child: ListView.builder(
-            controller: _controller,
-            scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
-            itemCount: 3,
-            itemBuilder: (context, i) => const ScheduleCard(),
-          ),
-        )
+        (data.isEmpty)
+            ? Container(
+                width: double.maxFinite,
+                height: 150,
+                margin: const EdgeInsets.only(bottom: 32),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF686B6D).withOpacity(0.1),
+                      offset: const Offset(5, 5),
+                      blurRadius: 19,
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(FeatherIcons.alertCircle),
+                    const SizedBox(height: 16),
+                    const Text('Tidak Ada Jadwal'),
+                  ],
+                ),
+              )
+            : SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  controller: _controller,
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: data.length,
+                  itemBuilder: (context, i) => ScheduleCard(data: data[i]),
+                ),
+              )
       ],
     );
   }

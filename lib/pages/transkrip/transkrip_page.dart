@@ -32,10 +32,7 @@ class TranskripPage extends StatelessWidget {
           ),
         ),
       ),
-      body: BlocConsumer<TranskripCubit, TranskripState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+      body: BlocBuilder<TranskripCubit, TranskripState>(
         builder: (context, state) {
           if (state is TranskripSuccess) {
             return Stack(

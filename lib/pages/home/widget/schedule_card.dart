@@ -1,8 +1,12 @@
+import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
 import 'package:flutter/material.dart';
 
 class ScheduleCard extends StatelessWidget {
+  final ScheduleModel data;
+
   const ScheduleCard({
     Key? key,
+    required this.data,
   }) : super(key: key);
 
   @override
