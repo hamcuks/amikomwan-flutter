@@ -20,6 +20,8 @@ import 'pages/schedule/schedule_page.dart';
 
 void main() async {
   await Hive.initFlutter();
+  await Hive.openBox('app_config');
+  await Hive.openBox('credentials');
   runApp(const MyApp());
 }
 

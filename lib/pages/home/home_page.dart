@@ -1,10 +1,7 @@
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
-import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
 import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
-import 'package:amikom_wan/data/repository/schedule/schedule_repository.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
@@ -16,7 +13,6 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'widget/live_class_card.dart';
 import 'widget/schedule_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -103,14 +99,20 @@ class HomePage extends StatelessWidget {
                         return Shimmer.fromColors(
                           baseColor: const Color(0xFFEEEEEE),
                           highlightColor: const Color(0xFFDADADA),
-                          child: Container(
-                            width: double.maxFinite,
-                            height: 150,
-                            margin: const EdgeInsets.symmetric(vertical: 8),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: Colors.white,
-                            ),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 32),
+                              Container(
+                                width: double.maxFinite,
+                                height: 150,
+                                margin: const EdgeInsets.symmetric(vertical: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(height: 32),
+                            ],
                           ),
                         );
                       }),
@@ -168,7 +170,7 @@ class _AppMenuSection extends StatelessWidget {
               menuName: 'KHS',
               icon: FeatherIcons.fileMinus,
               onTap: () async {
-                var box = await Hive.box('app_config');
+                var box = await Hive.openBox('app_config');
                 int _semester = box.get('semester');
                 String _tahunAkademik = box.get('tahunAkademik');
                 context.read<KhsCubit>().get(_semester, _tahunAkademik);

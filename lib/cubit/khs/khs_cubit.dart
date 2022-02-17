@@ -5,7 +5,6 @@ import 'package:amikom_wan/data/repository/khs/khs_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hive/hive.dart';
 
 part 'khs_state.dart';
 

@@ -12,18 +12,18 @@ class ScheduleInitial extends ScheduleState {}
 class ScheduleLoading extends ScheduleState {}
 
 class ScheduleSuccess extends ScheduleState {
-  List<ScheduleModel> data;
+  final List<ScheduleModel> data;
 
-  ScheduleSuccess(this.data);
+  const ScheduleSuccess(this.data);
 
   @override
   List<Object> get props => [data];
 }
 
 class ScheduleError extends ScheduleState {
-  String message;
+  final String message;
 
-  ScheduleError(this.message);
+  const ScheduleError(this.message);
 
   @override
   List<Object> get props => [message];

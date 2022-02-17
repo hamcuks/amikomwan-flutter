@@ -57,24 +57,24 @@ class ScheduleModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['IdHari'] = this.idHari;
-    data['IdJam'] = this.idJam;
-    data['IdKuliah'] = this.idKuliah;
-    data['Keterangan'] = this.keterangan;
-    data['Hari'] = this.hari;
-    data['Ruang'] = this.ruang;
-    data['Waktu'] = this.waktu;
-    data['ZoomURL'] = this.zoomURL;
-    data['IsZoomURL'] = this.isZoomURL;
-    data['Kode'] = this.kode;
-    data['MataKuliah'] = this.mataKuliah;
-    data['JenisKuliah'] = this.jenisKuliah;
-    data['Kelas'] = this.kelas;
-    data['Nik'] = this.nik;
-    data['NamaDosen'] = this.namaDosen;
-    data['EmailDosen'] = this.emailDosen;
-    data['Jenjang'] = this.jenjang;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['IdHari'] = idHari;
+    data['IdJam'] = idJam;
+    data['IdKuliah'] = idKuliah;
+    data['Keterangan'] = keterangan;
+    data['Hari'] = hari;
+    data['Ruang'] = ruang;
+    data['Waktu'] = waktu;
+    data['ZoomURL'] = zoomURL;
+    data['IsZoomURL'] = isZoomURL;
+    data['Kode'] = kode;
+    data['MataKuliah'] = mataKuliah;
+    data['JenisKuliah'] = jenisKuliah;
+    data['Kelas'] = kelas;
+    data['Nik'] = nik;
+    data['NamaDosen'] = namaDosen;
+    data['EmailDosen'] = emailDosen;
+    data['Jenjang'] = jenjang;
     return data;
   }
 }

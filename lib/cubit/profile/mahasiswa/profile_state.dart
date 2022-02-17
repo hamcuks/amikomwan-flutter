@@ -12,21 +12,19 @@ class ProfileInitial extends ProfileState {}
 class ProfileLoading extends ProfileState {}
 
 class ProfileSuccess extends ProfileState {
-  ProfileModel data;
+  final ProfileModel data;
 
-  ProfileSuccess(this.data);
+  const ProfileSuccess(this.data);
 
   @override
-  // TODO: implement props
   List<Object> get props => [data];
 }
 
 class ProfileError extends ProfileState {
-  String message;
+  final String message;
 
-  ProfileError(this.message);
+  const ProfileError(this.message);
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
 import 'package:amikom_wan/pages/widget/matakulia_loading_animation_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

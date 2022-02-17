@@ -5,19 +5,19 @@ class ProfileModel {
   ProfileModel({this.mhs, this.periodeAkademik});
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
-    mhs = json['Mhs'] != null ? new Mhs.fromJson(json['Mhs']) : null;
+    mhs = json['Mhs'] != null ? Mhs.fromJson(json['Mhs']) : null;
     periodeAkademik = json['PeriodeAkademik'] != null
-        ? new PeriodeAkademik.fromJson(json['PeriodeAkademik'])
+        ? PeriodeAkademik.fromJson(json['PeriodeAkademik'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.mhs != null) {
-      data['Mhs'] = this.mhs!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    if (mhs != null) {
+      data['Mhs'] = mhs!.toJson();
     }
-    if (this.periodeAkademik != null) {
-      data['PeriodeAkademik'] = this.periodeAkademik!.toJson();
+    if (periodeAkademik != null) {
+      data['PeriodeAkademik'] = periodeAkademik!.toJson();
     }
     return data;
   }
@@ -58,16 +58,16 @@ class Mhs {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Npm'] = this.npm;
-    data['Nama'] = this.nama;
-    data['Angkatan'] = this.angkatan;
-    data['EmailAmikom'] = this.emailAmikom;
-    data['PassEmail'] = this.passEmail;
-    data['Prodi'] = this.prodi;
-    data['IsBelumLulus'] = this.isBelumLulus;
-    data['IsAktif'] = this.isAktif;
-    data['NpmImg'] = this.npmImg;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['Npm'] = npm;
+    data['Nama'] = nama;
+    data['Angkatan'] = angkatan;
+    data['EmailAmikom'] = emailAmikom;
+    data['PassEmail'] = passEmail;
+    data['Prodi'] = prodi;
+    data['IsBelumLulus'] = isBelumLulus;
+    data['IsAktif'] = isAktif;
+    data['NpmImg'] = npmImg;
     return data;
   }
 }
@@ -84,9 +84,9 @@ class PeriodeAkademik {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['TahunAkademik'] = this.tahunAkademik;
-    data['Semester'] = this.semester;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['TahunAkademik'] = tahunAkademik;
+    data['Semester'] = semester;
     return data;
   }
 }

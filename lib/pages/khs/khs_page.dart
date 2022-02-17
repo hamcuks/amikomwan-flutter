@@ -88,7 +88,8 @@ class KHSPage extends StatelessWidget {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      padding: const EdgeInsets.only(
+                          bottom: 24, left: 24, right: 24),
                       physics: const BouncingScrollPhysics(),
                       itemCount: state.data.khs!.length,
                       itemBuilder: (context, i) => MataKuliahDetail(
@@ -96,7 +97,7 @@ class KHSPage extends StatelessWidget {
                         data: state.data.khs![i],
                       ),
                     ),
-                  )
+                  ),
                 ],
               );
             }

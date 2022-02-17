@@ -40,12 +40,15 @@ class ProfileItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 6),
-              Text(
-                data,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF756D8D),
-                  fontWeight: FontWeight.w500,
+              FittedBox(
+                clipBehavior: Clip.hardEdge,
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  data,
+                  style: const TextStyle(
+                    color: Color(0xFF756D8D),
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ],

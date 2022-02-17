@@ -18,7 +18,7 @@ class TranskripModel {
     if (json['Transkrip'] != null) {
       transkrip = <Transkrip>[];
       json['Transkrip'].forEach((v) {
-        transkrip!.add(new Transkrip.fromJson(v));
+        transkrip!.add(Transkrip.fromJson(v));
       });
     }
     ipk = json['Ipk'];
@@ -29,15 +29,15 @@ class TranskripModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.transkrip != null) {
-      data['Transkrip'] = this.transkrip!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    if (transkrip != null) {
+      data['Transkrip'] = transkrip!.map((v) => v.toJson()).toList();
     }
-    data['Ipk'] = this.ipk;
-    data['JmlSks'] = this.jmlSks;
-    data['SksWajib'] = this.sksWajib;
-    data['SksKonsentrasi'] = this.sksKonsentrasi;
-    data['SksPilihan'] = this.sksPilihan;
+    data['Ipk'] = ipk;
+    data['JmlSks'] = jmlSks;
+    data['SksWajib'] = sksWajib;
+    data['SksKonsentrasi'] = sksKonsentrasi;
+    data['SksPilihan'] = sksPilihan;
     return data;
   }
 }
@@ -71,14 +71,14 @@ class Transkrip {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Kode'] = this.kode;
-    data['NamaMk'] = this.namaMk;
-    data['NamaMkEn'] = this.namaMkEn;
-    data['SifatMk'] = this.sifatMk;
-    data['NamaSifatMk'] = this.namaSifatMk;
-    data['JmlSks'] = this.jmlSks;
-    data['Nilai'] = this.nilai;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['Kode'] = kode;
+    data['NamaMk'] = namaMk;
+    data['NamaMkEn'] = namaMkEn;
+    data['SifatMk'] = sifatMk;
+    data['NamaSifatMk'] = namaSifatMk;
+    data['JmlSks'] = jmlSks;
+    data['Nilai'] = nilai;
     return data;
   }
 }

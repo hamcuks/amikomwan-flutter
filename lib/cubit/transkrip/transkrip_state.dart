@@ -12,21 +12,19 @@ class TranskripInitial extends TranskripState {}
 class TranskripLoading extends TranskripState {}
 
 class TranskripSuccess extends TranskripState {
-  TranskripModel data;
+  final TranskripModel data;
 
-  TranskripSuccess(this.data);
+  const TranskripSuccess(this.data);
 
   @override
-  // TODO: implement props
   List<Object> get props => [data];
 }
 
 class TranskripError extends TranskripState {
-  String message;
+  final String message;
 
-  TranskripError(this.message);
+  const TranskripError(this.message);
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }

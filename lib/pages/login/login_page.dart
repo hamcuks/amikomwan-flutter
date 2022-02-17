@@ -70,7 +70,6 @@ class LoginPage extends StatelessWidget {
                               context.read<AuthCubit>().login(
                                   _npmController.text,
                                   _passwordController.text);
-                              context.read<ProfileCubit>().get();
                             }
                           },
                         );

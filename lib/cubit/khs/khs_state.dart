@@ -12,21 +12,19 @@ class KhsInitial extends KhsState {}
 class KhsLoading extends KhsState {}
 
 class KhsSuccess extends KhsState {
-  KHSModel data;
+  final KHSModel data;
 
-  KhsSuccess(this.data);
+  const KhsSuccess(this.data);
 
   @override
-  // TODO: implement props
   List<Object> get props => [data];
 }
 
 class KhsError extends KhsState {
-  String message;
+  final String message;
 
-  KhsError(this.message);
+  const KhsError(this.message);
 
   @override
-  // TODO: implement props
   List<Object> get props => [message];
 }

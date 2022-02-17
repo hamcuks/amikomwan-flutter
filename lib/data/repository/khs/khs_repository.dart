@@ -5,7 +5,6 @@ import 'package:amikom_wan/data/model/khs/khs_model.dart';
 import 'package:amikom_wan/helper/helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class KHSRepository {
   Dio? dio;
@@ -16,9 +15,6 @@ class KHSRepository {
       int semester, String tahunAkademik) async {
     // access token
     var token = await Helper().getToken('access');
-
-    // box
-    var box = await Hive.openBox('app_config');
 
     // header
     Options options = Options(

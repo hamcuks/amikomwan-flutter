@@ -9,7 +9,7 @@ class KHSModel {
     if (json['Khs'] != null) {
       khs = <Khs>[];
       json['Khs'].forEach((v) {
-        khs!.add(new Khs.fromJson(v));
+        khs!.add(Khs.fromJson(v));
       });
     }
     ipkSem = json['IpkSem'];
@@ -17,12 +17,12 @@ class KHSModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.khs != null) {
-      data['Khs'] = this.khs!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    if (khs != null) {
+      data['Khs'] = khs!.map((v) => v.toJson()).toList();
     }
-    data['IpkSem'] = this.ipkSem;
-    data['JmlSks'] = this.jmlSks;
+    data['IpkSem'] = ipkSem;
+    data['JmlSks'] = jmlSks;
     return data;
   }
 }
@@ -56,14 +56,14 @@ class Khs {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['KrsId'] = this.krsId;
-    data['Kode'] = this.kode;
-    data['NamaMk'] = this.namaMk;
-    data['NamaMkEn'] = this.namaMkEn;
-    data['JmlSks'] = this.jmlSks;
-    data['Nilai'] = this.nilai;
-    data['TglKrs'] = this.tglKrs;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['KrsId'] = krsId;
+    data['Kode'] = kode;
+    data['NamaMk'] = namaMk;
+    data['NamaMkEn'] = namaMkEn;
+    data['JmlSks'] = jmlSks;
+    data['Nilai'] = nilai;
+    data['TglKrs'] = tglKrs;
     return data;
   }
 }
