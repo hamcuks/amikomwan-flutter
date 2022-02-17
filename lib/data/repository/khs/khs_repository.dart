@@ -1,37 +1,51 @@
+import 'dart:developer';
+
 import 'package:amikom_wan/common/constant.dart';
-import 'package:amikom_wan/data/model/auth/login_model.dart';
+import 'package:amikom_wan/data/model/khs/khs_model.dart';
+import 'package:amikom_wan/helper/helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class AuthRepository {
+class KHSRepository {
   Dio? dio;
-  AuthRepository(this.dio);
 
-  Future<Either<String, LoginModel>> login(String npm, String password) async {
+  KHSRepository(this.dio);
+
+  Future<Either<String, KHSModel>> get(String npm) async {
+    // access token
+    var token = await Helper().getToken('access');
+
     // header
     Options options = Options(
       contentType: Headers.formUrlEncodedContentType,
       headers: {
         'User-Agent': userAgent,
+        'Authorization': token,
       },
     );
 
-    FormData data = FormData.fromMap({
-      'username': npm,
-      'keyword': password,
-    });
+    FormData data = FormData.fromMap(
+      {
+        'semester': 2,
+        'tahun_akademik': '2021/2022',
+      },
+    );
 
     try {
       Response response = await dio!.post(
-        baseUrl + 'login',
+        baseUrl + 'api/krs/khs',
         options: options,
         data: data,
       );
 
       if (response.statusCode != 200) throw Error();
 
-      return right(LoginModel.fromJson(response.data));
+      log(response.data.toString());
+
+      return right(KHSModel.fromJson(response.data));
     } on DioError catch (e) {
+      log(e.message);
+
       switch (e.type) {
         case DioErrorType.connectTimeout:
           return left('Gagal Login, Pastikan Terkoneksi ke Internet');

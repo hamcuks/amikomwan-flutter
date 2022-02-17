@@ -1,11 +1,20 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 class Helper {
-  void setDataHive(Box box, String key, String value) async {
-    await box.put(key, value);
+  void setToken(String key, String value) async {
+    var box = await Hive.openBox('credentials');
+    await box.put("${key}_token", value);
   }
 
-  Future<String> getDataHive(Box box, String key) async {
-    return await box.get(key);
+  Future<String> getToken(String key) async {
+    var box = await Hive.openBox('credentials');
+    return await box.get("${key}_token");
   }
+
+  String toUpperCamelCase(String val) => val
+      .replaceAll("  ", " ")
+      .split(" ")
+      .map((str) =>
+          str.trim()[0].toUpperCase() + str.trim().substring(1).toLowerCase())
+      .join(" ");
 }

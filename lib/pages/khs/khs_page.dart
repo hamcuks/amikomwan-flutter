@@ -1,3 +1,8 @@
+import 'dart:developer';
+
+import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../widget/mata_kuliah_detail_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,20 +32,47 @@ class KHSPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          const GPASummary(),
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              physics: const BouncingScrollPhysics(),
-              itemCount: 5,
-              itemBuilder: (context, i) => const MataKuliahDetail(
-                isKHS: true,
-              ),
-            ),
-          )
-        ],
+      body: BlocBuilder<KhsCubit, KhsState>(
+        builder: (context, state) {
+          if (state is KhsSuccess) {
+            log(state.data.toJson().toString());
+            return Stack(
+              children: [
+                Container(
+                  width: double.maxFinite,
+                  height: MediaQuery.of(context).size.height * .2,
+                  padding: const EdgeInsets.all(24),
+                  color: const Color(0xFF442C79),
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: GPASummary(
+                        data: state.data,
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: state.data.khs!.length,
+                        itemBuilder: (context, i) => MataKuliahDetail(
+                          isKHS: true,
+                          data: state.data.khs![i],
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            );
+          }
+
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }

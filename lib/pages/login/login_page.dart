@@ -1,6 +1,6 @@
 import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
+import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/src/provider.dart';
 
 import '../widget/app_button.dart';
 import '../widget/app_form_field.dart';
@@ -69,6 +69,7 @@ class LoginPage extends StatelessWidget {
                               context.read<AuthCubit>().login(
                                   _npmController.text,
                                   _passwordController.text);
+                              context.read<ProfileCubit>().get();
                             }
                           },
                         );

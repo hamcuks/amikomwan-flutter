@@ -25,9 +25,9 @@ class AuthCubit extends Cubit<AuthState> {
       },
       (data) {
         emit(AuthSuccess());
-        Helper().setDataHive(box, 'accessToken', data.accessToken!);
-        Helper().setDataHive(box, 'npm', npm);
-        Helper().setDataHive(box, 'isLoggedIn', 'true');
+        Helper().setToken('access', data.accessToken!);
+        box.put('npm', npm);
+        box.put('isLoggedIn', true);
       },
     );
   }

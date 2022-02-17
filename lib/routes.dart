@@ -6,4 +6,5 @@ class Routes {
   static const scanQr = '/scan-qr';
   static const khs = '/khs';
   static const transkrip = '/transkrip';
+  static const profile = '/profile';
 }

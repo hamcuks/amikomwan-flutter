@@ -1,11 +1,14 @@
+import 'package:amikom_wan/helper/helper.dart';
 import 'package:flutter/material.dart';
 
 class MataKuliahDetail extends StatelessWidget {
+  final dynamic data;
   final bool isTranskrip;
   final bool isKHS;
 
   const MataKuliahDetail({
     Key? key,
+    this.data,
     this.isTranskrip = false,
     this.isKHS = false,
   }) : super(key: key);
@@ -14,7 +17,6 @@ class MataKuliahDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      height: 140,
       margin: const EdgeInsets.only(bottom: 8, top: 16),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
@@ -29,13 +31,14 @@ class MataKuliahDetail extends StatelessWidget {
           ),
         ],
       ),
-      child: Stack(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(24),
             child: Text(
-              'Interaksi Manusia dan Komputer',
-              style: TextStyle(
+              Helper().toUpperCamelCase(data.namaMk),
+              style: const TextStyle(
                 fontSize: 18,
                 color: Color(0xFF442C79),
                 fontWeight: FontWeight.bold,
@@ -48,7 +51,7 @@ class MataKuliahDetail extends StatelessWidget {
               width: double.maxFinite,
               height: 54,
               color: const Color(0xFF442C79),
-              child: _buildContent(),
+              child: _buildContent(data),
             ),
           )
         ],
@@ -56,37 +59,37 @@ class MataKuliahDetail extends StatelessWidget {
     );
   }
 
-  Widget _buildContent() {
-    if (isKHS) return _buildKHS();
-    if (isTranskrip) return _buildTranskrip();
+  Widget _buildContent(dynamic data) {
+    if (isKHS) return _buildKHS(data);
+    if (isTranskrip) return _buildTranskrip(data);
 
-    return _buildSchedule();
+    return _buildSchedule(data);
   }
 
-  Row _buildKHS() {
+  Row _buildKHS(dynamic data) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _mataKuliahInfo('Kode', 'ST0817'),
-        _mataKuliahInfo('SKS', '2'),
-        _mataKuliahInfo('Nilai', 'A'),
+        _mataKuliahInfo('Kode', '${data.kode}'),
+        _mataKuliahInfo('SKS', '${data.jmlSks}'),
+        _mataKuliahInfo('Nilai', '${data.nilai ?? "-"}'),
       ],
     );
   }
 
-  Row _buildTranskrip() {
+  Row _buildTranskrip(dynamic data) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _mataKuliahInfo('Kode', 'ST0817'),
-        _mataKuliahInfo('Sifat', 'Wajib'),
-        _mataKuliahInfo('SKS', '2'),
-        _mataKuliahInfo('Nilai', 'A'),
+        _mataKuliahInfo('Kode', '${data.kode}'),
+        _mataKuliahInfo('Sifat', '${data.namaSifatMk}'),
+        _mataKuliahInfo('SKS', '${data.jmlSks}'),
+        _mataKuliahInfo('Nilai', '${data.nilai ?? "-"}'),
       ],
     );
   }
 
-  Row _buildSchedule() {
+  Row _buildSchedule(dynamic data) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [

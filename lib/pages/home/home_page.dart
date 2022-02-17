@@ -1,3 +1,8 @@
+import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
+import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
+import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../widget/app_menu_item.dart';
 import '../../routes.dart';
 import 'package:feather_icons/feather_icons.dart';
@@ -44,13 +49,33 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
-                          Container(
-                            width: 32,
-                            height: 32,
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFF3F3F3),
-                              shape: BoxShape.circle,
-                            ),
+                          BlocBuilder<ProfileCubit, ProfileState>(
+                            builder: (context, state) {
+                              if (state is ProfileSuccess) {
+                                return Container(
+                                  width: 32,
+                                  height: 32,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF3F3F3),
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          '${state.data.mhs!.npmImg}'),
+                                    ),
+                                  ),
+                                );
+                              }
+
+                              return Container(
+                                width: 32,
+                                height: 32,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFF3F3F3),
+                                  shape: BoxShape.circle,
+                                ),
+                              );
+                            },
                           )
                         ],
                       ),
@@ -110,7 +135,10 @@ class _AppMenuSection extends StatelessWidget {
             AppMenuItem(
               menuName: 'KHS',
               icon: FeatherIcons.fileMinus,
-              onTap: () => Navigator.pushNamed(context, Routes.khs),
+              onTap: () {
+                context.read<KhsCubit>().get();
+                Navigator.pushNamed(context, Routes.khs);
+              },
             ),
           ],
         ),
@@ -121,7 +149,10 @@ class _AppMenuSection extends StatelessWidget {
             AppMenuItem(
               menuName: 'Transkrip Nilai',
               icon: FeatherIcons.fileText,
-              onTap: () => Navigator.pushNamed(context, Routes.transkrip),
+              onTap: () {
+                context.read<TranskripCubit>().get();
+                Navigator.pushNamed(context, Routes.transkrip);
+              },
             ),
             AppMenuItem(
               menuName: 'KTM',
@@ -131,7 +162,10 @@ class _AppMenuSection extends StatelessWidget {
             AppMenuItem(
               menuName: 'Mahasiswa',
               icon: FeatherIcons.user,
-              onTap: () {},
+              onTap: () {
+                context.read<ProfileCubit>().get();
+                Navigator.pushNamed(context, Routes.profile);
+              },
             ),
           ],
         )
