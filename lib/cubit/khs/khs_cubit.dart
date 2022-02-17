@@ -12,13 +12,10 @@ part 'khs_state.dart';
 class KhsCubit extends Cubit<KhsState> {
   KhsCubit() : super(KhsInitial());
 
-  void get() async {
+  void get(int semester, String tahunAkademik) async {
     emit(KhsLoading());
 
-    var box = await Hive.openBox('credentials');
-    String npm = box.get('npm');
-
-    var repository = await KHSRepository(Dio()).get(npm);
+    var repository = await KHSRepository(Dio()).get(semester, tahunAkademik);
 
     repository.fold(
       (err) {

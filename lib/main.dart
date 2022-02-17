@@ -3,6 +3,7 @@ import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
 import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
+import 'package:amikom_wan/pages/ktm/ktm_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ScheduleCubit()..get()),
         BlocProvider(create: (_) => ProfileCubit()..get()),
         BlocProvider(create: (_) => ProfileActionCubit()),
-        BlocProvider(create: (_) => KhsCubit()..get()),
+        BlocProvider(create: (_) => KhsCubit()),
         BlocProvider(create: (_) => TranskripCubit()..get()),
       ],
       child: MaterialApp(
@@ -46,21 +47,37 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case (Routes.login):
-              return MaterialPageRoute(builder: (context) => LoginPage());
+              return MaterialPageRoute(
+                builder: (context) => LoginPage(),
+              );
             case (Routes.home):
-              return MaterialPageRoute(builder: (context) => HomePage());
+              return MaterialPageRoute(
+                builder: (context) => HomePage(),
+              );
             case (Routes.schedule):
-              return MaterialPageRoute(builder: (context) => SchedulePage());
+              return MaterialPageRoute(
+                builder: (context) => SchedulePage(),
+              );
             case (Routes.khs):
-              return MaterialPageRoute(builder: (context) => const KHSPage());
+              return MaterialPageRoute(
+                builder: (context) => KHSPage(),
+              );
             case (Routes.transkrip):
               return MaterialPageRoute(
-                  builder: (context) => const TranskripPage());
+                builder: (context) => const TranskripPage(),
+              );
+            case (Routes.ktm):
+              return MaterialPageRoute(
+                builder: (context) => KTMPage(),
+              );
             case (Routes.profile):
               return MaterialPageRoute(
-                  builder: (context) => const ProfilePage());
+                builder: (context) => const ProfilePage(),
+              );
             default:
-              return MaterialPageRoute(builder: (context) => LoginPage());
+              return MaterialPageRoute(
+                builder: (context) => LoginPage(),
+              );
           }
         },
       ),

@@ -14,7 +14,8 @@ class Helper {
   String toUpperCamelCase(String val) => val
       .replaceAll("  ", " ")
       .split(" ")
-      .map((str) =>
-          str.trim()[0].toUpperCase() + str.trim().substring(1).toLowerCase())
+      .map((str) => (str.length >= 3)
+          ? str.trim()[0].toUpperCase() + str.trim().substring(1).toLowerCase()
+          : str)
       .join(" ");
 }

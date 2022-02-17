@@ -15,6 +15,15 @@ class SchedulePage extends StatelessWidget {
   final ScrollController _controller =
       ScrollController(initialScrollOffset: 0.5);
 
+  final List<String> days = [
+    'Senin',
+    'Selasa',
+    'Rabu',
+    'Kamis',
+    'Jum\'at',
+    'Sabtu'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +60,12 @@ class SchedulePage extends StatelessWidget {
                 child: ListView.builder(
                   controller: _controller,
                   scrollDirection: Axis.horizontal,
-                  itemCount: 7,
-                  itemBuilder: (context, i) => const DayPill(),
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: days.length,
+                  itemBuilder: (context, i) => DayPill(
+                    data: days[i],
+                    position: i,
+                  ),
                 ),
               ),
               const SizedBox(height: 24),

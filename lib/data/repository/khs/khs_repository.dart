@@ -5,15 +5,20 @@ import 'package:amikom_wan/data/model/khs/khs_model.dart';
 import 'package:amikom_wan/helper/helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class KHSRepository {
   Dio? dio;
 
   KHSRepository(this.dio);
 
-  Future<Either<String, KHSModel>> get(String npm) async {
+  Future<Either<String, KHSModel>> get(
+      int semester, String tahunAkademik) async {
     // access token
     var token = await Helper().getToken('access');
+
+    // box
+    var box = await Hive.openBox('app_config');
 
     // header
     Options options = Options(
@@ -26,8 +31,8 @@ class KHSRepository {
 
     FormData data = FormData.fromMap(
       {
-        'semester': 2,
-        'tahun_akademik': '2021/2022',
+        'semester': semester,
+        'tahun_akademik': tahunAkademik,
       },
     );
 

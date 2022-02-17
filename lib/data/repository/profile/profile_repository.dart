@@ -6,6 +6,7 @@ import 'package:amikom_wan/data/model/profile/profile_model.dart';
 import 'package:amikom_wan/helper/helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class ProfileRepository {
   Dio? dio;
@@ -14,6 +15,9 @@ class ProfileRepository {
   Future<Either<String, ProfileModel>> get() async {
     // access token
     var token = await Helper().getToken('access');
+
+    // box
+    var box = await Hive.openBox('app_config');
 
     // header
     Options options = Options(headers: {
@@ -29,7 +33,12 @@ class ProfileRepository {
 
       if (response.statusCode != 200) throw Error();
 
-      return right(ProfileModel.fromJson(response.data));
+      ProfileModel data = ProfileModel.fromJson(response.data);
+
+      box.put('semester', data.periodeAkademik!.semester);
+      box.put('tahunAkademik', data.periodeAkademik!.tahunAkademik);
+
+      return right(data);
     } on DioError catch (e) {
       log(e.message);
       switch (e.type) {

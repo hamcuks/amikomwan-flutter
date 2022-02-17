@@ -6,6 +6,8 @@ import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
 import 'package:amikom_wan/data/repository/schedule/schedule_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lottie/lottie.dart';
 
 import '../widget/app_menu_item.dart';
 import '../../routes.dart';
@@ -154,8 +156,11 @@ class _AppMenuSection extends StatelessWidget {
             AppMenuItem(
               menuName: 'KHS',
               icon: FeatherIcons.fileMinus,
-              onTap: () {
-                // context.read<KhsCubit>().get();
+              onTap: () async {
+                var box = await Hive.box('app_config');
+                int _semester = box.get('semester');
+                String _tahunAkademik = box.get('tahunAkademik');
+                context.read<KhsCubit>().get(_semester, _tahunAkademik);
                 Navigator.pushNamed(context, Routes.khs);
               },
             ),
@@ -176,7 +181,9 @@ class _AppMenuSection extends StatelessWidget {
             AppMenuItem(
               menuName: 'KTM',
               icon: FeatherIcons.creditCard,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Routes.ktm);
+              },
             ),
             AppMenuItem(
               menuName: 'Profile',
@@ -250,8 +257,8 @@ class _ScheduleSection extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(FeatherIcons.alertCircle),
-                    const SizedBox(height: 16),
+                    Lottie.asset('assets/json/warning.json', width: 54),
+                    const SizedBox(height: 8),
                     const Text('Tidak Ada Jadwal'),
                   ],
                 ),
