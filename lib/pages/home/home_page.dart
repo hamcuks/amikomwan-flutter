@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../widget/app_menu_item.dart';
 import '../../routes.dart';
@@ -99,8 +100,18 @@ class HomePage extends StatelessWidget {
                           );
                         }
 
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return Shimmer.fromColors(
+                          baseColor: const Color(0xFFEEEEEE),
+                          highlightColor: const Color(0xFFDADADA),
+                          child: Container(
+                            width: double.maxFinite,
+                            height: 150,
+                            margin: const EdgeInsets.symmetric(vertical: 8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: Colors.white,
+                            ),
+                          ),
                         );
                       }),
                       const SizedBox(height: 32),

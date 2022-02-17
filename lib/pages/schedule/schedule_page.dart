@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
+import 'package:amikom_wan/pages/widget/matakulia_loading_animation_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../widget/mata_kuliah_detail_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -93,11 +95,13 @@ class SchedulePage extends StatelessWidget {
                   );
                 }
 
-                return const Expanded(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
+                return const MataKuliahLoadingAnimation();
+
+                // return const Expanded(
+                //   child: Center(
+                //     child: CircularProgressIndicator(),
+                //   ),
+                // );
               })
             ],
           ),
