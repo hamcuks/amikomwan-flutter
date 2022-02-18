@@ -2,6 +2,7 @@ import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
 import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
+import 'package:amikom_wan/pages/home/widget/live_class_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
@@ -82,11 +83,11 @@ class HomePage extends StatelessWidget {
                           )
                         ],
                       ),
-                      const SizedBox(height: 32),
+                      // const SizedBox(height: 32),
                       // const LiveClassCard(
                       //   kelas: 'Pemrograman Web lanjut',
                       // ),
-                      // const SizedBox(height: 32),
+                      const SizedBox(height: 32),
                       BlocBuilder<ScheduleCubit, ScheduleState>(
                           builder: (context, state) {
                         if (state is ScheduleSuccess) {
@@ -156,7 +157,9 @@ class _AppMenuSection extends StatelessWidget {
               menuName: 'Scan QR',
               icon: FeatherIcons.maximize,
               isGradient: true,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Routes.scanQr);
+              },
             ),
             AppMenuItem(
               menuName: 'Jadwal',

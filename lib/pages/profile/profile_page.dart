@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
 import 'package:amikom_wan/helper/helper.dart';
