@@ -14,7 +14,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.8.2"
+    version: "2.8.1"
   bloc:
     dependency: "direct main"
     description:
@@ -35,7 +35,7 @@ packages:
       name: characters
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.1.0"
   charcode:
     dependency: transitive
     description:
@@ -199,6 +199,7 @@ packages:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.12.11"
   material_color_utilities:
     dependency: transitive
@@ -207,6 +208,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.3"
+=======
+    version: "0.12.10"
+>>>>>>> 3d44037c0b103444160fa7ad44ec4acd18ac4920
   meta:
     dependency: transitive
     description:
@@ -358,7 +362,11 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.4.8"
+=======
+    version: "0.4.2"
+>>>>>>> 3d44037c0b103444160fa7ad44ec4acd18ac4920
   typed_data:
     dependency: transitive
     description:
@@ -372,7 +380,7 @@ packages:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.0"
   wave:
     dependency: "direct main"
     description:
