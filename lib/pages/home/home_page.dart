@@ -156,7 +156,9 @@ class _AppMenuSection extends StatelessWidget {
               menuName: 'Scan QR',
               icon: FeatherIcons.maximize,
               isGradient: true,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, Routes.scanQr);
+              },
             ),
             AppMenuItem(
               menuName: 'Jadwal',

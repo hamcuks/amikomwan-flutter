@@ -4,6 +4,7 @@ import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
 import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
 import 'package:amikom_wan/pages/ktm/ktm_page.dart';
+import 'package:amikom_wan/pages/presensi/presensi_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -75,6 +76,10 @@ class MyApp extends StatelessWidget {
             case (Routes.profile):
               return MaterialPageRoute(
                 builder: (context) => const ProfilePage(),
+              );
+            case (Routes.scanQr):
+              return MaterialPageRoute(
+                builder: (context) => const PresensiPage(),
               );
             default:
               return MaterialPageRoute(
