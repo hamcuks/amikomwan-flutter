@@ -106,14 +106,14 @@ class _PresensiPageState extends State<PresensiPage> {
                   IconButton(
                     onPressed: () =>
                         _controller.changeCamera(CameraPosition.front),
-                    icon: Icon(
+                    icon: const Icon(
                       CupertinoIcons.switch_camera,
                       color: Color(0xFFFAFAFA),
                     ),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       CupertinoIcons.bolt_circle,
                       color: Color(0xFFFAFAFA),
                     ),

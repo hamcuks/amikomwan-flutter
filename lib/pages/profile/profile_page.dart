@@ -3,10 +3,13 @@ import 'dart:developer';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
 import 'package:amikom_wan/helper/helper.dart';
+import 'package:amikom_wan/pages/widget/app_button.dart';
+import 'package:amikom_wan/routes.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import 'widget/profile_item_widget.dart';
 
@@ -190,7 +193,20 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 32),
+                  AppButton(
+                    onPressed: () async {
+                      var box = await Hive.openBox('credentials');
+
+                      await box.put('isLoggedIn', false);
+                      await box.delete('access_token');
+
+                      Navigator.pushReplacementNamed(context, Routes.login);
+                    },
+                    text: 'Logout',
+                    color: const Color(0xFFFF6C3E),
+                  ),
                 ],
               );
             },

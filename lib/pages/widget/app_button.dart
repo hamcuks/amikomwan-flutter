@@ -4,12 +4,14 @@ class AppButton extends StatelessWidget {
   final String text;
   final bool isLoading;
   final VoidCallback onPressed;
+  final Color color;
 
   const AppButton({
     Key? key,
     required this.onPressed,
     this.text = 'Text Button',
     this.isLoading = false,
+    this.color = const Color(0xFF442C79),
   }) : super(key: key);
 
   @override
@@ -33,7 +35,7 @@ class AppButton extends StatelessWidget {
                 ),
               ),
         style: TextButton.styleFrom(
-          backgroundColor: const Color(0xFF442C79),
+          backgroundColor: color,
           textStyle: const TextStyle(
             color: Color(0xFFF3F3F3),
           ),

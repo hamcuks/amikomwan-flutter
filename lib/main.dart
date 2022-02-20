@@ -2,9 +2,12 @@ import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
+import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
 import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
 import 'package:amikom_wan/pages/ktm/ktm_page.dart';
 import 'package:amikom_wan/pages/presensi/presensi_page.dart';
+import 'package:amikom_wan/pages/presensi/presensi_result_page.dart';
+import 'package:amikom_wan/pages/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (_) => SplashCubit()..getCredential()),
         BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(create: (_) => ScheduleCubit()..get()),
         BlocProvider(create: (_) => ProfileCubit()..get()),
@@ -46,9 +50,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xFFF3F9FE),
         ),
-        initialRoute: Routes.login,
+        initialRoute: Routes.splash,
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
+            case (Routes.splash):
+              return MaterialPageRoute(
+                builder: (context) => const SplashPage(),
+              );
             case (Routes.login):
               return MaterialPageRoute(
                 builder: (context) => LoginPage(),
@@ -79,7 +87,7 @@ class MyApp extends StatelessWidget {
               );
             case (Routes.scanQr):
               return MaterialPageRoute(
-                builder: (context) => const PresensiPage(),
+                builder: (context) => const PresensiResultPage(),
               );
             default:
               return MaterialPageRoute(
