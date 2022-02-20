@@ -1,4 +1,5 @@
 import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
+import 'package:amikom_wan/cubit/gpa_summary/gpa_summary_cubit.dart';
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ProfileCubit()..get()),
         BlocProvider(create: (_) => ProfileActionCubit()),
         BlocProvider(create: (_) => KhsCubit()),
+        BlocProvider(create: (_) => GpaSummaryCubit()),
         BlocProvider(create: (_) => TranskripCubit()..get()),
       ],
       child: MaterialApp(

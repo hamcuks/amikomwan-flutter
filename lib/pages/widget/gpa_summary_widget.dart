@@ -1,4 +1,6 @@
+import 'package:amikom_wan/cubit/gpa_summary/gpa_summary_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
@@ -14,6 +16,9 @@ class GPASummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context
+        .watch<GpaSummaryCubit>()
+        .getGPALevel(isKHS ? data?.ipkSem ?? 0.0 : data?.ipk ?? 0.0);
     return Stack(
       children: [
         Container(
@@ -42,25 +47,27 @@ class GPASummary extends StatelessWidget {
                   padding: const EdgeInsets.all(4),
                   child: Stack(
                     children: [
-                      Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: Color(0xFF3FA699)),
-                        child: WaveWidget(
-                          config: CustomConfig(
-                            colors: [
-                              Colors.white.withOpacity(.1),
-                              Colors.greenAccent.withOpacity(0.2)
-                            ],
-                            durations: [10000, 20000],
-                            heightPercentages: [0.20, 0.23],
-                          ),
-                          waveAmplitude: 0,
-                          size: const Size(
-                            double.infinity,
-                            double.infinity,
-                          ),
-                        ),
+                      BlocBuilder<GpaSummaryCubit, GpaLevelModel>(
+                        builder: (context, state) {
+                          return Container(
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: state.backgroundColor),
+                            child: WaveWidget(
+                              config: CustomConfig(
+                                colors: state.colors,
+                                durations: [10000, 20000],
+                                heightPercentages: state.heightPercentage,
+                              ),
+                              waveAmplitude: 2,
+                              size: const Size(
+                                double.infinity,
+                                double.infinity,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       Align(
                         alignment: Alignment.center,

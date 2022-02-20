@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/amikom-logo.png', width: 118),
+            Image.asset('assets/images/amikom-logo.png', width: 96),
             const SizedBox(height: 48),
             Form(
               key: _formKey,
@@ -67,7 +67,7 @@ class LoginPage extends StatelessWidget {
                           text: 'Login',
                           onPressed: () async {
                             var box = await Hive.openBox('credentials');
-                            String npm = await box.get('npm');
+                            String npm = await box.get('npm') ?? '';
                             if (_formKey.currentState!.validate()) {
                               if (npm.isNotEmpty &&
                                   npm != _npmController.text) {

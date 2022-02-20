@@ -2,6 +2,7 @@ import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
 import 'package:amikom_wan/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -22,16 +23,24 @@ class SplashPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Center(
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              width: 72,
-              height: 72,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/amikom-logo.png'),
+          return SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: 96,
+                  height: 96,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/amikom-logo.png'),
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(height: 16),
+                Lottie.asset('assets/json/loading.json', width: 150),
+              ],
             ),
           );
         },
