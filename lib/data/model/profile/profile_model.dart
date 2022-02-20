@@ -1,11 +1,13 @@
 import 'package:hive/hive.dart';
 
-@HiveType()
+part 'profile_model.g.dart';
+
+@HiveType(typeId: 1)
 class ProfileModel {
   @HiveField(0)
   Mhs? mhs;
 
-  @HiveField(0)
+  @HiveField(1)
   PeriodeAkademik? periodeAkademik;
 
   ProfileModel({this.mhs, this.periodeAkademik});
@@ -29,15 +31,33 @@ class ProfileModel {
   }
 }
 
+@HiveType(typeId: 2)
 class Mhs {
+  @HiveField(0)
   String? npm;
+
+  @HiveField(1)
   String? nama;
+
+  @HiveField(2)
   String? angkatan;
+
+  @HiveField(3)
   String? emailAmikom;
+
+  @HiveField(4)
   String? passEmail;
+
+  @HiveField(5)
   String? prodi;
+
+  @HiveField(6)
   int? isBelumLulus;
+
+  @HiveField(7)
   int? isAktif;
+
+  @HiveField(8)
   String? npmImg;
 
   Mhs(
@@ -78,8 +98,12 @@ class Mhs {
   }
 }
 
+@HiveType(typeId: 3)
 class PeriodeAkademik {
+  @HiveField(0)
   String? tahunAkademik;
+
+  @HiveField(1)
   int? semester;
 
   PeriodeAkademik({this.tahunAkademik, this.semester});

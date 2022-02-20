@@ -5,6 +5,7 @@ import 'package:amikom_wan/data/repository/profile/profile_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 part 'profile_state.dart';
 

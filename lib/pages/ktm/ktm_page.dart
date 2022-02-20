@@ -1,4 +1,7 @@
+import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
+import 'package:amikom_wan/pages/widget/app_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class KTMPage extends StatelessWidget {
   KTMPage({Key? key}) : super(key: key);
@@ -11,9 +14,14 @@ class KTMPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Row(
-          children: const [
-            // AppDropdown(hintText: 'Pilih Semester', data: semester),
-            // AppDropdown(hintText: 'Pilih Tahun', data: tahunAkademik),
+          children: [
+            Container(
+              width: 300,
+              child: AppButton(
+                onPressed: () {},
+                text: 'Get profile',
+              ),
+            )
           ],
         ),
       ),

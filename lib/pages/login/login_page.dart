@@ -1,5 +1,4 @@
 import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
-import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 

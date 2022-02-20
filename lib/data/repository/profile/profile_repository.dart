@@ -36,6 +36,7 @@ class ProfileRepository {
 
       box.put('semester', data.periodeAkademik!.semester);
       box.put('tahunAkademik', data.periodeAkademik!.tahunAkademik);
+      box.put('profile_data', data);
 
       return right(data);
     } on DioError catch (e) {

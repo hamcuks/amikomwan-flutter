@@ -5,6 +5,7 @@ import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dar
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
 import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
 import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
+import 'package:amikom_wan/data/model/profile/profile_model.dart';
 import 'package:amikom_wan/pages/ktm/ktm_page.dart';
 import 'package:amikom_wan/pages/presensi/presensi_page.dart';
 import 'package:amikom_wan/pages/presensi/presensi_result_page.dart';
@@ -27,7 +28,15 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('app_config');
   await Hive.openBox('credentials');
+  registerAdapters();
+
   runApp(const MyApp());
+}
+
+void registerAdapters() {
+  Hive.registerAdapter(ProfileModelAdapter());
+  Hive.registerAdapter(MhsAdapter());
+  Hive.registerAdapter(PeriodeAkademikAdapter());
 }
 
 class MyApp extends StatelessWidget {
