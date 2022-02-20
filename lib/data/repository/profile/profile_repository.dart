@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:amikom_wan/common/constant.dart';
-import 'package:amikom_wan/data/model/auth/login_model.dart';
 import 'package:amikom_wan/data/model/profile/profile_model.dart';
 import 'package:amikom_wan/helper/helper.dart';
 import 'package:dartz/dartz.dart';
