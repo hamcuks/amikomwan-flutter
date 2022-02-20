@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'widget/profile_item_widget.dart';
 
@@ -80,12 +81,16 @@ class ProfilePage extends StatelessWidget {
                                 ),
                               )
                             : Center(
-                                child: Container(
-                                  width: 92,
-                                  height: 92,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey,
+                                child: Shimmer.fromColors(
+                                  baseColor: const Color(0xFFEEEEEE),
+                                  highlightColor: const Color(0xFFDADADA),
+                                  child: Container(
+                                    width: 92,
+                                    height: 92,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
                               ),

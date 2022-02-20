@@ -1,5 +1,11 @@
+import 'package:hive/hive.dart';
+
+@HiveType()
 class ProfileModel {
+  @HiveField(0)
   Mhs? mhs;
+
+  @HiveField(0)
   PeriodeAkademik? periodeAkademik;
 
   ProfileModel({this.mhs, this.periodeAkademik});

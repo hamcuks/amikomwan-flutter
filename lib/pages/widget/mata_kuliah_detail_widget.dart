@@ -1,5 +1,6 @@
 import 'package:amikom_wan/helper/helper.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class MataKuliahDetail extends StatelessWidget {
   final dynamic data;
@@ -36,14 +37,27 @@ class MataKuliahDetail extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(24),
-            child: Text(
-              Helper().toUpperCamelCase(data.namaMk),
-              style: const TextStyle(
-                fontSize: 18,
-                color: Color(0xFF442C79),
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: (data != null)
+                ? Text(
+                    Helper().toUpperCamelCase(data.namaMk),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFF442C79),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                : Shimmer.fromColors(
+                    baseColor: const Color(0xFFEEEEEE),
+                    highlightColor: const Color(0xFFDADADA),
+                    child: Container(
+                      width: 150,
+                      height: 12,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFEEEEEE),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -70,9 +84,9 @@ class MataKuliahDetail extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _mataKuliahInfo('Kode', '${data.kode}'),
-        _mataKuliahInfo('SKS', '${data.jmlSks}'),
-        _mataKuliahInfo('Nilai', '${data.nilai ?? "-"}'),
+        _mataKuliahInfo('Kode', '${data?.kode ?? ""}'),
+        _mataKuliahInfo('SKS', '${data?.jmlSks ?? ""}'),
+        _mataKuliahInfo('Nilai', '${data?.nilai ?? "-"}'),
       ],
     );
   }
@@ -81,10 +95,10 @@ class MataKuliahDetail extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _mataKuliahInfo('Kode', '${data.kode}'),
-        _mataKuliahInfo('Sifat', '${data.namaSifatMk}'),
-        _mataKuliahInfo('SKS', '${data.jmlSks}'),
-        _mataKuliahInfo('Nilai', '${data.nilai ?? "-"}'),
+        _mataKuliahInfo('Kode', '${data?.kode ?? ""}'),
+        _mataKuliahInfo('Sifat', '${data?.namaSifatMk ?? ""}'),
+        _mataKuliahInfo('SKS', '${data?.jmlSks ?? ""}'),
+        _mataKuliahInfo('Nilai', '${data?.nilai ?? "-"}'),
       ],
     );
   }
@@ -111,15 +125,30 @@ class MataKuliahDetail extends StatelessWidget {
             color: Color(0xFFA39CB8),
           ),
         ),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 10,
-            color: Color(0xFFF3F3F3),
-            fontWeight: FontWeight.bold,
-          ),
-        )
+        (value.isNotEmpty)
+            ? const SizedBox(height: 4)
+            : const SizedBox(height: 8),
+        (value.isNotEmpty)
+            ? Text(
+                value,
+                style: const TextStyle(
+                  fontSize: 10,
+                  color: Color(0xFFF3F3F3),
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            : Shimmer.fromColors(
+                baseColor: const Color.fromARGB(255, 84, 52, 155),
+                highlightColor: const Color.fromARGB(255, 109, 67, 201),
+                child: Container(
+                  width: 30,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF442C79),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              )
       ],
     );
   }

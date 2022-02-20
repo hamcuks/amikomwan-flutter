@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProfileItem extends StatelessWidget {
   final String title;
@@ -40,17 +41,30 @@ class ProfileItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 6),
-              FittedBox(
-                clipBehavior: Clip.hardEdge,
-                fit: BoxFit.fitWidth,
-                child: Text(
-                  data,
-                  style: const TextStyle(
-                    color: Color(0xFF756D8D),
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
+              (data.isNotEmpty)
+                  ? FittedBox(
+                      clipBehavior: Clip.hardEdge,
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                        data,
+                        style: const TextStyle(
+                          color: Color(0xFF756D8D),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    )
+                  : Shimmer.fromColors(
+                      baseColor: const Color(0xFFEEEEEE),
+                      highlightColor: const Color(0xFFDADADA),
+                      child: Container(
+                        width: 150,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFEEEEEE),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
             ],
           ),
           const Spacer(),

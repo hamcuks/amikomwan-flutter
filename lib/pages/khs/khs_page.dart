@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/pages/widget/app_drop_down.dart';
-import 'package:amikom_wan/pages/widget/matakulia_loading_animation_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widget/mata_kuliah_detail_widget.dart';
@@ -75,15 +74,15 @@ class KHSPage extends StatelessWidget {
               ],
             ),
           ),
-          BlocBuilder<KhsCubit, KhsState>(builder: (context, state) {
-            if (state is KhsSuccess) {
+          BlocBuilder<KhsCubit, KhsState>(
+            builder: (context, state) {
               return Column(
                 children: [
                   const SizedBox(height: 72),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: GPASummary(
-                      data: state.data,
+                      data: (state is KhsSuccess) ? state.data : null,
                     ),
                   ),
                   Expanded(
@@ -91,19 +90,18 @@ class KHSPage extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           bottom: 24, left: 24, right: 24),
                       physics: const BouncingScrollPhysics(),
-                      itemCount: state.data.khs!.length,
+                      itemCount:
+                          (state is KhsSuccess) ? state.data.khs!.length : 5,
                       itemBuilder: (context, i) => MataKuliahDetail(
                         isKHS: true,
-                        data: state.data.khs![i],
+                        data: (state is KhsSuccess) ? state.data.khs![i] : null,
                       ),
                     ),
                   ),
                 ],
               );
-            }
-
-            return const MataKuliahLoadingAnimation();
-          })
+            },
+          )
         ],
       ),
     );

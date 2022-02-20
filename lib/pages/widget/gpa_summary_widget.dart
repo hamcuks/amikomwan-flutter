@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
@@ -64,7 +65,7 @@ class GPASummary extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                          "${isKHS ? data.ipkSem : data.ipk}",
+                          "${isKHS ? data?.ipkSem ?? 0 : data?.ipk ?? 0}",
                           style: const TextStyle(
                             fontSize: 24,
                             color: Color(0xFFF3F3F3),
@@ -83,16 +84,16 @@ class GPASummary extends StatelessWidget {
                   children: [
                     TranskripItem(
                       title: 'Jumlah SKS',
-                      value: '${data.jmlSks}',
+                      value: '${data?.jmlSks ?? ""}',
                     ),
                     isKHS
                         ? TranskripItem(
                             title: 'Indeks Prestasi',
-                            value: '${data.ipkSem}',
+                            value: '${data?.ipkSem ?? ""}',
                           )
                         : TranskripItem(
                             title: 'Wajib',
-                            value: '${data.sksWajib}',
+                            value: '${data?.sksWajib ?? ""}',
                           ),
                   ],
                 ),
@@ -105,11 +106,11 @@ class GPASummary extends StatelessWidget {
                         children: [
                           TranskripItem(
                             title: 'Konsentrasi',
-                            value: '${data.sksKonsentrasi}',
+                            value: '${data?.sksKonsentrasi ?? ""}',
                           ),
                           TranskripItem(
                             title: 'Pilihan',
-                            value: '${data.sksPilihan}',
+                            value: '${data?.sksPilihan ?? ""}',
                           ),
                         ],
                       ),
@@ -148,14 +149,27 @@ class TranskripItem extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Color(0xFF442C79),
-              fontWeight: FontWeight.w700,
-            ),
-          )
+          (value.isNotEmpty)
+              ? Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Color(0xFF442C79),
+                    fontWeight: FontWeight.w700,
+                  ),
+                )
+              : Shimmer.fromColors(
+                  baseColor: const Color(0xFFEEEEEE),
+                  highlightColor: const Color(0xFFDADADA),
+                  child: Container(
+                    width: 30,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF442C79),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                )
         ],
       ),
     );

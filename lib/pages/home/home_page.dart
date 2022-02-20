@@ -71,12 +71,16 @@ class HomePage extends StatelessWidget {
                                 );
                               }
 
-                              return Container(
-                                width: 32,
-                                height: 32,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFF3F3F3),
-                                  shape: BoxShape.circle,
+                              return Shimmer.fromColors(
+                                baseColor: const Color(0xFFEEEEEE),
+                                highlightColor: const Color(0xFFDADADA),
+                                child: Container(
+                                  width: 32,
+                                  height: 32,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFF3F3F3),
+                                    shape: BoxShape.circle,
+                                  ),
                                 ),
                               );
                             },

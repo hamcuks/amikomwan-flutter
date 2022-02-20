@@ -23,6 +23,7 @@ class KhsCubit extends Cubit<KhsState> {
       },
       (data) {
         // log(data.transkrip![20].namaMk.toString(), name: "TRANSKRIP");
+        // emit(KhsLoading());
         emit(KhsSuccess(data));
       },
     );

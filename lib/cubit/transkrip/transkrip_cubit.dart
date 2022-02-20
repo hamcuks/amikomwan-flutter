@@ -28,6 +28,7 @@ class TranskripCubit extends Cubit<TranskripState> {
       (data) {
         // log(data.transkrip![20].namaMk.toString(), name: "TRANSKRIP");
         emit(TranskripSuccess(data));
+        // emit(TranskripLoading());
       },
     );
   }

@@ -22,6 +22,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       },
       (data) {
         log(data.toString());
+        // emit(ProfileLoading());
         emit(ProfileSuccess(data));
       },
     );

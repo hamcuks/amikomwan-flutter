@@ -65,7 +65,7 @@ class SchedulePage extends StatelessWidget {
                     return ListView.builder(
                       controller: _controller,
                       scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.only(bottom: 16),
+                      padding: const EdgeInsets.only(bottom: 16),
                       physics: const BouncingScrollPhysics(),
                       itemCount: days.length,
                       itemBuilder: (context, i) => DayPill(
