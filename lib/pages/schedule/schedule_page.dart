@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
 import 'package:amikom_wan/pages/widget/matakulia_loading_animation_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../widget/mata_kuliah_detail_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,17 +58,26 @@ class SchedulePage extends StatelessWidget {
             children: [
               Container(
                 width: double.maxFinite,
-                height: 40,
+                height: 54,
                 color: const Color(0xFF442C79),
-                child: ListView.builder(
-                  controller: _controller,
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: days.length,
-                  itemBuilder: (context, i) => DayPill(
-                    data: days[i],
-                    position: i,
-                  ),
+                child: BlocBuilder<ChooseDayCubit, String>(
+                  builder: (context, state) {
+                    return ListView.builder(
+                      controller: _controller,
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.only(bottom: 16),
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: days.length,
+                      itemBuilder: (context, i) => DayPill(
+                        data: days[i],
+                        position: i,
+                        isActive: state == days[i].toLowerCase(),
+                        onTap: () => context
+                            .read<ChooseDayCubit>()
+                            .chooseDay(days[i].toLowerCase()),
+                      ),
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 24),
@@ -75,9 +86,32 @@ class SchedulePage extends StatelessWidget {
                 log(state.toString());
                 if (state is ScheduleSuccess) {
                   if (state.data.isEmpty) {
-                    return const Expanded(
-                      child: Center(
-                        child: Text('Tidak Ada Jadwal'),
+                    return Expanded(
+                      child: Container(
+                        width: double.maxFinite,
+                        height: double.maxFinite,
+                        margin:
+                            const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 24),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF686B6D).withOpacity(0.1),
+                              offset: const Offset(5, 5),
+                              blurRadius: 19,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Lottie.asset('assets/json/warning.json', width: 54),
+                            const SizedBox(height: 8),
+                            const Text('Tidak Ada Jadwal'),
+                          ],
+                        ),
                       ),
                     );
                   }
