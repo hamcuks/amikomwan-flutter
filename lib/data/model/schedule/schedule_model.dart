@@ -57,7 +57,7 @@ class ScheduleModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['IdHari'] = idHari;
     data['IdJam'] = idJam;
     data['IdKuliah'] = idKuliah;

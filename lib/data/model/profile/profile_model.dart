@@ -12,7 +12,7 @@ class ProfileModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (mhs != null) {
       data['Mhs'] = mhs!.toJson();
     }
@@ -58,7 +58,7 @@ class Mhs {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['Npm'] = npm;
     data['Nama'] = nama;
     data['Angkatan'] = angkatan;
@@ -84,7 +84,7 @@ class PeriodeAkademik {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['TahunAkademik'] = tahunAkademik;
     data['Semester'] = semester;
     return data;

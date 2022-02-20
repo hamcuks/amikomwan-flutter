@@ -1,11 +1,7 @@
 import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
 import 'package:amikom_wan/routes.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-=======
->>>>>>> 20c0653ec88cc11799b2c9c151f6e6958e615d47
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -16,7 +12,6 @@ class SplashPage extends StatelessWidget {
       body: BlocConsumer<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is SplashSuccess) {
-            print(state.isLoggedIn);
             Future.delayed(const Duration(milliseconds: 500), () {
               if (!state.isLoggedIn) {
                 Navigator.pushReplacementNamed(context, Routes.login);

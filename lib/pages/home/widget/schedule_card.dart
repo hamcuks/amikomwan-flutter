@@ -52,20 +52,20 @@ class ScheduleCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text(
                     'Eli Pujastuti, S. Kom, M. Eng',
                     style: TextStyle(
                       fontSize: 12,
-                      color: const Color(0xFF756D8D),
+                      color: Color(0xFF756D8D),
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
                   Text(
                     '07.00 - 08.50 | R 4.5.1',
                     style: TextStyle(
                       fontSize: 12,
-                      color: const Color(0xFF756D8D),
+                      color: Color(0xFF756D8D),
                     ),
                   ),
                 ],

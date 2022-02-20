@@ -11,7 +11,7 @@ class KTMPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Row(
-          children: [
+          children: const [
             // AppDropdown(hintText: 'Pilih Semester', data: semester),
             // AppDropdown(hintText: 'Pilih Tahun', data: tahunAkademik),
           ],

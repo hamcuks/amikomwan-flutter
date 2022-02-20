@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fast_barcode_scanner/fast_barcode_scanner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -164,7 +166,7 @@ class ScannerFramePainter extends CustomPainter {
     final cutOutPath = Path.combine(PathOperation.difference,
         Path()..addRect(screenRect), Path()..addRRect(cutOut));
 
-    canvas..drawPath(cutOutPath, backgroundPaint);
+    canvas.drawPath(cutOutPath, backgroundPaint);
   }
 
   @override

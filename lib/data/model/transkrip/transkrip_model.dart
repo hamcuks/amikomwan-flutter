@@ -29,7 +29,7 @@ class TranskripModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (transkrip != null) {
       data['Transkrip'] = transkrip!.map((v) => v.toJson()).toList();
     }
@@ -71,7 +71,7 @@ class Transkrip {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['Kode'] = kode;
     data['NamaMk'] = namaMk;
     data['NamaMkEn'] = namaMkEn;
