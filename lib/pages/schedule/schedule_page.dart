@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
-import 'package:amikom_wan/pages/widget/matakulia_loading_animation_widget.dart';
+import 'package:amikom_wan/pages/widget/matakuliah_loading_animation_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 
@@ -80,61 +80,50 @@ class SchedulePage extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 24),
               BlocBuilder<ScheduleCubit, ScheduleState>(
                   builder: (context, state) {
-                log(state.toString());
-                if (state is ScheduleSuccess) {
-                  if (state.data.isEmpty) {
-                    return Expanded(
-                      child: Container(
-                        width: double.maxFinite,
-                        height: double.maxFinite,
-                        margin:
-                            const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 24),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFF686B6D).withOpacity(0.1),
-                              offset: const Offset(5, 5),
-                              blurRadius: 19,
-                              spreadRadius: 2,
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Lottie.asset('assets/json/warning.json', width: 54),
-                            const SizedBox(height: 8),
-                            const Text('Tidak Ada Jadwal'),
-                          ],
-                        ),
-                      ),
-                    );
-                  }
-
+                if (state is ScheduleSuccess && state.data.isEmpty) {
                   return Expanded(
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      itemCount: state.data.length,
-                      itemBuilder: (context, i) => MataKuliahDetail(
-                        data: state.data[i],
+                    child: Container(
+                      width: double.maxFinite,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 48),
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF686B6D).withOpacity(0.1),
+                            offset: const Offset(5, 5),
+                            blurRadius: 19,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Lottie.asset('assets/json/warning.json', width: 72),
+                          const SizedBox(height: 8),
+                          const Text('Tidak Ada Jadwal'),
+                        ],
                       ),
                     ),
                   );
                 }
 
-                return const MataKuliahLoadingAnimation();
-
-                // return const Expanded(
-                //   child: Center(
-                //     child: CircularProgressIndicator(),
-                //   ),
-                // );
+                return Expanded(
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount:
+                        (state is ScheduleSuccess) ? state.data.length : 5,
+                    itemBuilder: (context, i) => MataKuliahDetail(
+                      data: (state is ScheduleSuccess) ? state.data[i] : null,
+                    ),
+                  ),
+                );
               })
             ],
           ),

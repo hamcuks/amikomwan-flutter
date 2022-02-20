@@ -1,20 +1,58 @@
+import 'package:hive/hive.dart';
+
+part 'schedule_model.g.dart';
+
+@HiveType(typeId: 0)
 class ScheduleModel {
+  @HiveField(0)
   int? idHari;
+
+  @HiveField(1)
   int? idJam;
+
+  @HiveField(2)
   int? idKuliah;
+
+  @HiveField(3)
   String? keterangan;
+
+  @HiveField(4)
   String? hari;
+
+  @HiveField(5)
   String? ruang;
+
+  @HiveField(6)
   String? waktu;
+
+  @HiveField(7)
   String? zoomURL;
+
+  @HiveField(8)
   int? isZoomURL;
+
+  @HiveField(9)
   String? kode;
+
+  @HiveField(10)
   String? mataKuliah;
+
+  @HiveField(11)
   String? jenisKuliah;
+
+  @HiveField(12)
   String? kelas;
+
+  @HiveField(13)
   String? nik;
+
+  @HiveField(14)
   String? namaDosen;
+
+  @HiveField(15)
   String? emailDosen;
+
+  @HiveField(16)
   String? jenjang;
 
   ScheduleModel(

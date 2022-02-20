@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class Helper {
@@ -18,4 +19,11 @@ class Helper {
           ? str.trim()[0].toUpperCase() + str.trim().substring(1).toLowerCase()
           : str)
       .join(" ");
+
+  Future<bool> checkConnection() async {
+    var result = await Connectivity().checkConnectivity();
+
+    return (result == ConnectivityResult.mobile ||
+        result == ConnectivityResult.wifi);
+  }
 }

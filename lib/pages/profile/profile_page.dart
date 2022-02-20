@@ -72,7 +72,7 @@ class ProfilePage extends StatelessWidget {
                                   height: 92,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: Colors.grey,
+                                    color: Colors.grey.shade300,
                                     image: DecorationImage(
                                         image: NetworkImage(
                                             state.data.mhs!.npmImg!),
@@ -87,9 +87,9 @@ class ProfilePage extends StatelessWidget {
                                   child: Container(
                                     width: 92,
                                     height: 92,
-                                    decoration: const BoxDecoration(
+                                    decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.grey,
+                                      color: Colors.grey.shade300,
                                     ),
                                   ),
                                 ),

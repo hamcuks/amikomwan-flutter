@@ -1,4 +1,5 @@
 import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
+import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
 import 'package:amikom_wan/pages/widget/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,9 @@ class KTMPage extends StatelessWidget {
             Container(
               width: 300,
               child: AppButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<ScheduleCubit>().get();
+                },
                 text: 'Get profile',
               ),
             )

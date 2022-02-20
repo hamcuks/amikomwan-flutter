@@ -107,9 +107,10 @@ class MataKuliahDetail extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _mataKuliahInfo('Jam', '08.00 - 10.40'),
-        _mataKuliahInfo('Ruang', '5.2.1'),
-        _mataKuliahInfo('Perkuliahan', 'Praktikum'),
+        _mataKuliahInfo('Hari', '${data?.hari ?? ""}'),
+        _mataKuliahInfo('Jam', '${data?.waktu ?? ""}'),
+        _mataKuliahInfo('Ruang', '${data?.ruang ?? ""}'),
+        _mataKuliahInfo('Perkuliahan', '${data?.jenisKuliah ?? ""}'),
       ],
     );
   }
