@@ -9,7 +9,7 @@ class SplashCubit extends Cubit<SplashState> {
 
   void getCredential() async {
     var box = await Hive.openBox('credentials');
-    var isLoggedIn = await box.get('isLoggedIn');
+    var isLoggedIn = await box.get('isLoggedIn') ?? false;
 
     emit(SplashSuccess(isLoggedIn));
   }

@@ -197,8 +197,8 @@ class ProfilePage extends StatelessWidget {
                     onPressed: () async {
                       var box = await Hive.openBox('credentials');
 
-                      await box.put('isLoggedIn', false);
                       await box.delete('access_token');
+                      await box.delete('isLoggedIn');
 
                       Navigator.pushReplacementNamed(context, Routes.login);
                     },

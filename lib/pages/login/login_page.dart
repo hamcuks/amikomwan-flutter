@@ -1,6 +1,7 @@
 import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
 import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 import '../widget/app_button.dart';
 import '../widget/app_form_field.dart';
@@ -65,12 +66,23 @@ class LoginPage extends StatelessWidget {
                       } else {
                         return AppButton(
                           text: 'Login',
-                          onPressed: () {
+                          onPressed: () async {
+                            var box = await Hive.openBox('credentials');
+                            String npm = await box.get('npm');
                             if (_formKey.currentState!.validate()) {
-                              context.read<AuthCubit>().login(
-                                  _npmController.text,
-                                  _passwordController.text);
-                              context.read<ProfileCubit>().get();
+                              if (npm.isNotEmpty &&
+                                  npm != _npmController.text) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Aplikasi hanya bisa digunakan untuk satu NIM'),
+                                  ),
+                                );
+                              } else {
+                                context.read<AuthCubit>().login(
+                                    _npmController.text,
+                                    _passwordController.text);
+                              }
                             }
                           },
                         );
