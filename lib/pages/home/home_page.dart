@@ -26,6 +26,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
               children: [
                 Container(
                   width: double.maxFinite,
-                  height: MediaQuery.of(context).size.height * .43,
+                  height: size.height * .43,
                   color: const Color(0xFF432A79),
                 ),
                 Padding(
@@ -121,7 +122,7 @@ class HomePage extends StatelessWidget {
                           ),
                         );
                       }),
-                      const SizedBox(height: 32),
+                      SizedBox(height: size.height * 0.03),
                       const _AppMenuSection()
                     ],
                   ),
@@ -157,64 +158,73 @@ class _AppMenuSection extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            AppMenuItem(
-              menuName: 'Scan QR',
-              icon: FeatherIcons.maximize,
-              isGradient: true,
-              onTap: () {
-                Navigator.pushNamed(context, Routes.scanQr);
-              },
+            Column(
+              children: [
+                AppMenuItem(
+                  menuName: 'Scan QR',
+                  icon: FeatherIcons.maximize,
+                  isGradient: true,
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.scanQr);
+                  },
+                ),
+                const SizedBox(height: 24),
+                AppMenuItem(
+                  menuName: 'Transkrip Nilai',
+                  icon: FeatherIcons.fileText,
+                  onTap: () {
+                    // context.read<TranskripCubit>().get();
+                    Navigator.pushNamed(context, Routes.transkrip);
+                  },
+                ),
+              ],
             ),
-            AppMenuItem(
-              menuName: 'Jadwal',
-              icon: FeatherIcons.calendar,
-              onTap: () {
-                // context.read<ScheduleCubit>().get();
-                Navigator.pushNamed(context, Routes.schedule);
-              },
+            Column(
+              children: [
+                AppMenuItem(
+                  menuName: 'Jadwal',
+                  icon: FeatherIcons.calendar,
+                  onTap: () {
+                    // context.read<ScheduleCubit>().get();
+                    Navigator.pushNamed(context, Routes.schedule);
+                  },
+                ),
+                const SizedBox(height: 24),
+                AppMenuItem(
+                  menuName: 'KTM',
+                  icon: FeatherIcons.creditCard,
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.ktm);
+                  },
+                ),
+              ],
             ),
-            AppMenuItem(
-              menuName: 'KHS',
-              icon: FeatherIcons.fileMinus,
-              onTap: () async {
-                var box = await Hive.openBox('app_config');
-                int _semester = box.get('semester');
-                String _tahunAkademik = box.get('tahunAkademik');
-                context.read<KhsCubit>().get(_semester, _tahunAkademik);
-                Navigator.pushNamed(context, Routes.khs);
-              },
+            Column(
+              children: [
+                AppMenuItem(
+                  menuName: 'KHS',
+                  icon: FeatherIcons.fileMinus,
+                  onTap: () async {
+                    var box = await Hive.openBox('app_config');
+                    int _semester = box.get('semester');
+                    String _tahunAkademik = box.get('tahunAkademik');
+                    context.read<KhsCubit>().get(_semester, _tahunAkademik);
+                    Navigator.pushNamed(context, Routes.khs);
+                  },
+                ),
+                const SizedBox(height: 24),
+                AppMenuItem(
+                  menuName: 'Profile',
+                  icon: FeatherIcons.user,
+                  onTap: () {
+                    // context.read<ProfileCubit>().get();
+                    Navigator.pushNamed(context, Routes.profile);
+                  },
+                ),
+              ],
             ),
           ],
         ),
-        const SizedBox(height: 24),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            AppMenuItem(
-              menuName: 'Transkrip Nilai',
-              icon: FeatherIcons.fileText,
-              onTap: () {
-                // context.read<TranskripCubit>().get();
-                Navigator.pushNamed(context, Routes.transkrip);
-              },
-            ),
-            AppMenuItem(
-              menuName: 'KTM',
-              icon: FeatherIcons.creditCard,
-              onTap: () {
-                Navigator.pushNamed(context, Routes.ktm);
-              },
-            ),
-            AppMenuItem(
-              menuName: 'Profile',
-              icon: FeatherIcons.user,
-              onTap: () {
-                // context.read<ProfileCubit>().get();
-                Navigator.pushNamed(context, Routes.profile);
-              },
-            ),
-          ],
-        )
       ],
     );
   }

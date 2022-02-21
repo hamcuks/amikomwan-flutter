@@ -1,7 +1,9 @@
+import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
 import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
 import 'package:amikom_wan/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashPage extends StatelessWidget {
@@ -11,12 +13,18 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<SplashCubit, SplashState>(
-        listener: (context, state) {
+        listener: (context, state) async {
+          var box = await Hive.openBox('credentials');
           if (state is SplashSuccess) {
             Future.delayed(const Duration(milliseconds: 500), () {
               if (!state.isLoggedIn) {
                 Navigator.pushReplacementNamed(context, Routes.login);
               } else {
+                String npm = box.get('npm');
+                String password = box.get('password');
+
+                context.read<AuthCubit>().login(npm, password);
+
                 Navigator.pushReplacementNamed(context, Routes.home);
               }
             });

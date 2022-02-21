@@ -33,7 +33,6 @@ dependencies:
   dartz: ^0.10.1
   dio: ^4.0.4
   equatable: ^2.0.3
-  fast_barcode_scanner: ^1.1.4
   feather_icons: ^1.2.0
   flutter:
     sdk: flutter
@@ -42,6 +41,7 @@ dependencies:
   hive_flutter: ^1.1.0
   lottie: ^1.2.2
   path_provider: ^2.0.9
+  qr_code_scanner: ^0.7.0
   shimmer: ^2.0.0
   wave: ^0.2.0
 

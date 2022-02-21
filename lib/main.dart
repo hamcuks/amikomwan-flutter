@@ -2,6 +2,7 @@ import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
 import 'package:amikom_wan/cubit/gpa_summary/gpa_summary_cubit.dart';
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
+import 'package:amikom_wan/cubit/scanner/scanner_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
 import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => KhsCubit()),
         BlocProvider(create: (_) => GpaSummaryCubit()),
         BlocProvider(create: (_) => TranskripCubit()..get()),
+        BlocProvider(create: (_) => ScannerCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -102,7 +104,7 @@ class MyApp extends StatelessWidget {
               );
             case (Routes.scanQr):
               return MaterialPageRoute(
-                builder: (context) => const PresensiResultPage(),
+                builder: (context) => const PresensiPage(),
               );
             default:
               return MaterialPageRoute(

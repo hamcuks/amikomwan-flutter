@@ -1,8 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
-import 'package:fast_barcode_scanner/fast_barcode_scanner.dart';
+import 'package:amikom_wan/cubit/scanner/scanner_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class PresensiPage extends StatefulWidget {
   const PresensiPage({Key? key}) : super(key: key);
@@ -12,12 +15,28 @@ class PresensiPage extends StatefulWidget {
 }
 
 class _PresensiPageState extends State<PresensiPage> {
-  final CameraController _controller = CameraController.instance;
+  final GlobalKey _cameraKey = GlobalKey(debugLabel: 'QR SCANNER: ');
+  Barcode? result;
+  bool isFrontCameraActive = false;
+  bool isTorchActive = false;
+
+  QRViewController? _controller;
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
+  }
+
+  @override
+  void reassemble() {
+    if (Platform.isIOS) {
+      _controller?.resumeCamera();
+    } else if (Platform.isAndroid) {
+      _controller?.pauseCamera();
+    }
+
+    super.reassemble();
   }
 
   @override
@@ -25,19 +44,13 @@ class _PresensiPageState extends State<PresensiPage> {
     return Scaffold(
       body: Stack(
         children: [
-          BarcodeCamera(
-            types: const [
-              BarcodeType.qr,
-            ],
-            resolution: Resolution.hd720,
-            framerate: Framerate.fps30,
-            mode: DetectionMode.pauseDetection,
-            onScan: (code) =>
-                log(code.value.toString(), name: "RESULT SCAN QR:"),
-            children: const [
-              CameraOverlay(),
-            ],
+          SizedBox.expand(
+            child: QRView(
+              key: _cameraKey,
+              onQRViewCreated: _onQRViewCreated,
+            ),
           ),
+          const CameraOverlay(),
           Positioned(
             top: 32,
             left: 0,
@@ -104,18 +117,37 @@ class _PresensiPageState extends State<PresensiPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(
-                    onPressed: () =>
-                        _controller.changeCamera(CameraPosition.front),
-                    icon: const Icon(
-                      CupertinoIcons.switch_camera,
-                      color: Color(0xFFFAFAFA),
+                    onPressed: () async {
+                      await _controller?.flipCamera();
+                      var _isFrontCamera = await _controller?.getCameraInfo() ==
+                          CameraFacing.front;
+
+                      isFrontCameraActive = _isFrontCamera;
+
+                      setState(() {});
+                    },
+                    icon: Icon(
+                      (isFrontCameraActive)
+                          ? CupertinoIcons.switch_camera_solid
+                          : CupertinoIcons.switch_camera,
+                      color: const Color(0xFFFAFAFA),
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      CupertinoIcons.bolt_circle,
-                      color: Color(0xFFFAFAFA),
+                    onPressed: () async {
+                      _controller?.toggleFlash();
+
+                      var _isTorchActive = await _controller?.getFlashStatus();
+
+                      isTorchActive = _isTorchActive!;
+                    },
+                    icon: Icon(
+                      (isTorchActive)
+                          ? CupertinoIcons.bolt_circle_fill
+                          : CupertinoIcons.bolt_circle,
+                      color: (isTorchActive)
+                          ? const Color.fromARGB(255, 245, 176, 29)
+                          : const Color(0xFFFAFAFA),
                     ),
                   ),
                 ],
@@ -125,6 +157,13 @@ class _PresensiPageState extends State<PresensiPage> {
         ],
       ),
     );
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    _controller = controller;
+    controller.scannedDataStream.listen((data) {
+      log(data.format.toString());
+    });
   }
 }
 
