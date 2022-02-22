@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
             Stack(
@@ -92,7 +93,7 @@ class HomePage extends StatelessWidget {
                       // const LiveClassCard(
                       //   kelas: 'Pemrograman Web lanjut',
                       // ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: size.height * 0.02),
                       BlocBuilder<ScheduleCubit, ScheduleState>(
                           builder: (context, state) {
                         if (state is ScheduleSuccess) {
@@ -122,7 +123,7 @@ class HomePage extends StatelessWidget {
                           ),
                         );
                       }),
-                      SizedBox(height: size.height * 0.03),
+                      SizedBox(height: size.height * 0.02),
                       const _AppMenuSection()
                     ],
                   ),

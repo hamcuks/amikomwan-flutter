@@ -60,7 +60,7 @@ class GPASummary extends StatelessWidget {
                                 durations: [10000, 20000],
                                 heightPercentages: state.heightPercentage,
                               ),
-                              waveAmplitude: 2,
+                              waveAmplitude: 0,
                               size: const Size(
                                 double.infinity,
                                 double.infinity,

@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:amikom_wan/common/constant.dart';
+import 'package:amikom_wan/data/model/khs/akademik/akademik_model.dart';
 import 'package:amikom_wan/data/model/khs/khs_model.dart';
 import 'package:amikom_wan/helper/helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class KHSRepository {
   Dio? dio;
@@ -55,6 +57,50 @@ class KHSRepository {
         default:
           return left(e.message);
       }
+    }
+  }
+
+  Future<void> getAkademik() async {
+    log("Exec Get Akademik");
+
+    // access token
+    var token = await Helper().getToken('access');
+
+    // init hive box
+    var box = await Hive.openBox('credentials');
+    var appConfigBox = await Hive.openBox('app_config');
+
+    // get NPM
+    String npm = await box.get('npm');
+
+    // header
+    Options options = Options(
+      contentType: Headers.formUrlEncodedContentType,
+      headers: {
+        'User-Agent': userAgent,
+        'Authorization': token,
+      },
+    );
+
+    FormData formData = FormData.fromMap(
+      {
+        'npm': npm,
+      },
+    );
+
+    try {
+      Response response = await dio!.post(
+        baseUrl + 'api/krs/init_khs',
+        options: options,
+        data: formData,
+      );
+
+      if (response.statusCode != 200) throw Error();
+
+      AkademikModel data = AkademikModel.fromJson(response.data);
+      await appConfigBox.put('akademik', data);
+    } on DioError catch (e) {
+      log(e.message);
     }
   }
 }

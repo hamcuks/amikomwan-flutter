@@ -1,17 +1,17 @@
 import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
 import 'package:amikom_wan/cubit/gpa_summary/gpa_summary_cubit.dart';
+import 'package:amikom_wan/cubit/khs/action/cubit/akademik_cubit.dart';
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
-import 'package:amikom_wan/cubit/scanner/scanner_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
 import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
 import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
+import 'package:amikom_wan/data/model/khs/akademik/akademik_model.dart';
 import 'package:amikom_wan/data/model/profile/profile_model.dart';
 import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
 import 'package:amikom_wan/pages/ktm/ktm_page.dart';
 import 'package:amikom_wan/pages/presensi/presensi_page.dart';
-import 'package:amikom_wan/pages/presensi/presensi_result_page.dart';
 import 'package:amikom_wan/pages/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -41,6 +41,9 @@ void registerAdapters() {
   Hive.registerAdapter(MhsAdapter());
   Hive.registerAdapter(PeriodeAkademikAdapter());
   Hive.registerAdapter(ScheduleModelAdapter());
+  Hive.registerAdapter(AkademikModelAdapter());
+  Hive.registerAdapter(TahunAdapter());
+  Hive.registerAdapter(SemesterAdapter());
 }
 
 class MyApp extends StatelessWidget {
@@ -57,9 +60,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ProfileCubit()..get()),
         BlocProvider(create: (_) => ProfileActionCubit()),
         BlocProvider(create: (_) => KhsCubit()),
+        BlocProvider(create: (_) => AkademikCubit()..get()),
         BlocProvider(create: (_) => GpaSummaryCubit()),
         BlocProvider(create: (_) => TranskripCubit()..get()),
-        BlocProvider(create: (_) => ScannerCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

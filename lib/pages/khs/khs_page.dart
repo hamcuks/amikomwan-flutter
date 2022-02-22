@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:amikom_wan/cubit/khs/action/cubit/akademik_cubit.dart';
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
+import 'package:amikom_wan/data/model/khs/akademik/akademik_model.dart';
 import 'package:amikom_wan/pages/widget/app_drop_down.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../widget/mata_kuliah_detail_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,35 +46,60 @@ class KHSPage extends StatelessWidget {
             height: MediaQuery.of(context).size.height * .2,
             padding: const EdgeInsets.symmetric(horizontal: 24),
             color: const Color(0xFF442C79),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: AppDropdown(
-                    hintText: 'Pilih Semester',
-                    data: const ['Ganjil', 'Genap'],
-                    isExpanded: true,
-                    onChanged: (value) {
-                      _semester = (value.toLowerCase() == 'ganjil') ? 1 : 2;
-                      context.read<KhsCubit>().get(_semester, _tahunAkademik);
-                      log(_semester.toString());
-                    },
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: AppDropdown(
-                    hintText: 'Pilih Tahun',
-                    data: const ['2019/2020', '2020/2021', '2021/2022'],
-                    isExpanded: true,
-                    onChanged: (value) {
-                      _tahunAkademik = value;
-                      context.read<KhsCubit>().get(_semester, _tahunAkademik);
-                      log(_tahunAkademik);
-                    },
-                  ),
-                ),
-              ],
+            child: BlocBuilder<AkademikCubit, AkademikState>(
+              builder: (context, state) {
+                late List<Semester> dataSemester;
+                if (state is AkademikSuccess) {
+                  dataSemester = state.data.semester!;
+                }
+
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: AppDropdown(
+                        hintText: 'Pilih Semester',
+                        data: (state is AkademikSuccess)
+                            ? dataSemester.map((x) => x.nama!).toList()
+                            : ['Ganjil', 'Genap'],
+                        isExpanded: true,
+                        onChanged: (value) {
+                          var _intValue = dataSemester.map((e) {
+                            if (e.nama == value) {
+                              return e.kode;
+                            }
+                          }).toList();
+                          _semester = _intValue
+                              .firstWhere((element) => element != null) as int;
+                          context
+                              .read<KhsCubit>()
+                              .get(_semester, _tahunAkademik);
+                          log(_semester.toString(), name: "SEMESTER ");
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: AppDropdown(
+                        hintText: 'Pilih Tahun',
+                        data: (state is AkademikSuccess)
+                            ? state.data.tahun!
+                                .map((x) => x.thnAjaran!)
+                                .toList()
+                            : ['2020/2021', '2021/2022'],
+                        isExpanded: true,
+                        onChanged: (value) {
+                          _tahunAkademik = value;
+                          context
+                              .read<KhsCubit>()
+                              .get(_semester, _tahunAkademik);
+                          log(_tahunAkademik);
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           BlocBuilder<KhsCubit, KhsState>(
@@ -86,23 +114,53 @@ class KHSPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.only(
-                          bottom: 24, left: 24, right: 24),
-                      physics: const BouncingScrollPhysics(),
-                      itemCount:
-                          (state is KhsSuccess) ? state.data.khs!.length : 5,
-                      itemBuilder: (context, i) => MataKuliahDetail(
-                        isKHS: true,
-                        data: (state is KhsSuccess) ? state.data.khs![i] : null,
-                      ),
-                    ),
+                    child: _buildListMataKuliah(state),
                   ),
                 ],
               );
             },
           )
         ],
+      ),
+    );
+  }
+
+  // Container _buildEmptyData() {
+  //   return Container(
+  //     width: double.maxFinite,
+  //     margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+  //     clipBehavior: Clip.antiAlias,
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(4),
+  //       color: Colors.white,
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: const Color(0xFF686B6D).withOpacity(0.1),
+  //           offset: const Offset(5, 5),
+  //           blurRadius: 19,
+  //           spreadRadius: 2,
+  //         ),
+  //       ],
+  //     ),
+  //     child: Column(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Lottie.asset('assets/json/warning.json', width: 72),
+  //         const SizedBox(height: 8),
+  //         const Text('Tidak Ada Data Matakuliah'),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+  ListView _buildListMataKuliah(KhsState state) {
+    return ListView.builder(
+      padding: const EdgeInsets.only(bottom: 24, left: 24, right: 24),
+      physics: const BouncingScrollPhysics(),
+      itemCount: (state is KhsSuccess) ? state.data.khs!.length : 5,
+      itemBuilder: (context, i) => MataKuliahDetail(
+        isKHS: true,
+        data: (state is KhsSuccess) ? state.data.khs![i] : null,
       ),
     );
   }

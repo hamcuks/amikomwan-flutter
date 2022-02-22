@@ -16,7 +16,7 @@ class SplashPage extends StatelessWidget {
         listener: (context, state) async {
           var box = await Hive.openBox('credentials');
           if (state is SplashSuccess) {
-            Future.delayed(const Duration(milliseconds: 500), () {
+            Future.delayed(const Duration(milliseconds: 3000), () {
               if (!state.isLoggedIn) {
                 Navigator.pushReplacementNamed(context, Routes.login);
               } else {
