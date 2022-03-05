@@ -37,6 +37,8 @@ class AuthRepository {
           return left('Gagal Login, Pastikan Terkoneksi ke Internet');
         case DioErrorType.response:
           return left('Gagal Login, Pastikan NIM dan Password Benar');
+        case DioErrorType.other:
+          return left('Pastikan Smartphone terkoneksi dengan Internet!');
         default:
           return left(e.message);
       }
