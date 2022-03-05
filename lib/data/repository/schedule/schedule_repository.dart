@@ -46,6 +46,8 @@ class ScheduleRepository {
 
       box.put('schedule_data', data);
 
+      log(data.toString());
+
       return right(data);
     } on DioError catch (e) {
       log(e.message);

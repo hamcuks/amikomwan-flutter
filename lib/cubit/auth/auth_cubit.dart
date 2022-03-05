@@ -30,8 +30,32 @@ class AuthCubit extends Cubit<AuthState> {
         box.put('password', password);
         box.put('isLoggedIn', true);
 
-        log(data.accessToken.toString());
+        log(data.accessToken.toString(), name: 'login');
       },
     );
+  }
+
+  void authPresensi(String npm, String password) async {
+    var repository = await AuthRepository(Dio()).loginPresensi(npm, password);
+
+    repository.fold(
+      (err) {
+        log(err);
+      },
+      (data) {
+        Helper().setToken('access2', data.accessToken!);
+
+        log(data.accessToken.toString(), name: 'auth presensi');
+      },
+    );
+  }
+
+  void logOut() async {
+    emit(AuthLoading());
+    var box = await Hive.openBox('credentials');
+
+    await box.delete('access_token');
+    await box.delete('isLoggedIn');
+    emit(AuthSuccess());
   }
 }

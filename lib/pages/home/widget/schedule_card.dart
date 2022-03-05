@@ -1,6 +1,8 @@
 import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../helper/helper.dart';
+
 class ScheduleCard extends StatelessWidget {
   final ScheduleModel data;
 
@@ -31,17 +33,20 @@ class ScheduleCard extends StatelessWidget {
           ],
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: double.maxFinite,
               height: 32,
-              color: const Color(0xFF432A79).withOpacity(.88),
+              color: data.jenisKuliah == 'Teori'
+                  ? const Color(0xFF432A79).withOpacity(.88)
+                  : const Color(0xFFFF8F3E).withOpacity(.88),
             ),
-            const Padding(
-              padding: EdgeInsets.all(16),
+            Padding(
+              padding: const EdgeInsets.all(16),
               child: Text(
-                'Interaksi Manusia dan Komputer',
-                style: TextStyle(
+                Helper().toUpperCamelCase(data.mataKuliah!),
+                style: const TextStyle(
                   color: Color(0xFF54505E),
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
@@ -52,17 +57,17 @@ class ScheduleCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    'Eli Pujastuti, S. Kom, M. Eng',
-                    style: TextStyle(
+                    '${data.namaDosen}',
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xFF756D8D),
                     ),
                   ),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   Text(
-                    '07.00 - 08.50 | R 4.5.1',
+                    '${data.waktu} | ${data.ruang}',
                     style: TextStyle(
                       fontSize: 12,
                       color: Color(0xFF756D8D),

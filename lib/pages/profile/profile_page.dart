@@ -1,3 +1,4 @@
+import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
 import 'package:amikom_wan/helper/helper.dart';
@@ -182,7 +183,9 @@ class ProfilePage extends StatelessWidget {
                             return ProfileItem(
                               icon: FeatherIcons.key,
                               title: 'Password',
-                              suffixIcon: FeatherIcons.eye,
+                              suffixIcon: (!passwordState)
+                                  ? FeatherIcons.eye
+                                  : FeatherIcons.eyeOff,
                               suffixAction: () => context
                                   .read<ProfileActionCubit>()
                                   .showPassword(!passwordState),
@@ -198,17 +201,22 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  AppButton(
-                    onPressed: () async {
-                      var box = await Hive.openBox('credentials');
-
-                      await box.delete('access_token');
-                      await box.delete('isLoggedIn');
-
-                      Navigator.pushReplacementNamed(context, Routes.login);
+                  BlocConsumer<AuthCubit, AuthState>(
+                    listener: (context, state) {
+                      if (state is AuthSuccess) {
+                        Navigator.pushReplacementNamed(context, Routes.login);
+                      }
                     },
-                    text: 'Logout',
-                    color: const Color(0xFFFF6C3E),
+                    builder: (context, state) {
+                      return AppButton(
+                        onPressed: () async {
+                          context.read<AuthCubit>().logOut();
+                        },
+                        text: 'Logout',
+                        isLoading: (state is AuthLoading),
+                        color: const Color(0xFFFF6C3E),
+                      );
+                    },
                   ),
                 ],
               );

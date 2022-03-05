@@ -11,10 +11,10 @@ part 'khs_state.dart';
 class KhsCubit extends Cubit<KhsState> {
   KhsCubit() : super(KhsInitial());
 
-  void get(int semester, String tahunAkademik) async {
+  void get({int? semester, String? tahunAkademik}) async {
     emit(KhsLoading());
 
-    var repository = await KHSRepository(Dio()).get(semester, tahunAkademik);
+    var repository = await KHSRepository(Dio()).get(semester!, tahunAkademik!);
 
     repository.fold(
       (err) {

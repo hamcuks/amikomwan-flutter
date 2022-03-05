@@ -1,7 +1,8 @@
 import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
 import 'package:amikom_wan/cubit/gpa_summary/gpa_summary_cubit.dart';
-import 'package:amikom_wan/cubit/khs/action/cubit/akademik_cubit.dart';
+import 'package:amikom_wan/cubit/khs/action/choose_semester/choose_semester_cubit.dart';
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
+import 'package:amikom_wan/cubit/ktm/ktm_cubit.dart';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
@@ -16,6 +17,7 @@ import 'package:amikom_wan/pages/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'cubit/khs/action/akademik/akademik_cubit.dart';
 import 'cubit/profile/mahasiswa/profile_cubit.dart';
 import 'pages/home/home_page.dart';
 import 'pages/khs/khs_page.dart';
@@ -62,7 +64,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => KhsCubit()),
         BlocProvider(create: (_) => AkademikCubit()..get()),
         BlocProvider(create: (_) => GpaSummaryCubit()),
+        BlocProvider(create: (_) => ChooseSemesterCubit()),
         BlocProvider(create: (_) => TranskripCubit()..get()),
+        BlocProvider(create: (_) => KtmCubit()..get()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

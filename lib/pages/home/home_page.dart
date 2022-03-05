@@ -8,6 +8,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../cubit/schedule/action/choose_day/choose_day_cubit.dart';
+import '../../helper/helper.dart';
 import '../widget/app_menu_item.dart';
 import '../../routes.dart';
 import 'package:feather_icons/feather_icons.dart';
@@ -18,11 +20,6 @@ import 'widget/schedule_card.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
-
-  final PageController _controller = PageController(
-    viewportFraction: 0.5,
-    keepPage: false,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +33,7 @@ class HomePage extends StatelessWidget {
               children: [
                 Container(
                   width: double.maxFinite,
-                  height: size.height * .43,
+                  height: size.height * .4,
                   color: const Color(0xFF432A79),
                 ),
                 Padding(
@@ -96,34 +93,38 @@ class HomePage extends StatelessWidget {
                       SizedBox(height: size.height * 0.02),
                       BlocBuilder<ScheduleCubit, ScheduleState>(
                           builder: (context, state) {
-                        if (state is ScheduleSuccess) {
-                          return _ScheduleSection(
-                            controller: _controller,
-                            data: state.data,
+                        if (state is ScheduleLoading) {
+                          return Shimmer.fromColors(
+                            baseColor: const Color(0xFFEEEEEE),
+                            highlightColor: const Color(0xFFDADADA),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 32),
+                                Container(
+                                  width: double.maxFinite,
+                                  height: 150,
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(height: 32),
+                              ],
+                            ),
                           );
                         }
-
-                        return Shimmer.fromColors(
-                          baseColor: const Color(0xFFEEEEEE),
-                          highlightColor: const Color(0xFFDADADA),
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 32),
-                              Container(
-                                width: double.maxFinite,
-                                height: 150,
-                                margin: const EdgeInsets.symmetric(vertical: 8),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(height: 32),
-                            ],
-                          ),
+                        return _ScheduleSection(
+                          data: (state is ScheduleSuccess)
+                              ? state.data
+                                  .where((element) =>
+                                      element.idHari == DateTime.now().weekday)
+                                  .toList()
+                              : <ScheduleModel>[],
                         );
                       }),
-                      SizedBox(height: size.height * 0.02),
+                      SizedBox(height: size.height * 0.04),
                       const _AppMenuSection()
                     ],
                   ),
@@ -187,6 +188,9 @@ class _AppMenuSection extends StatelessWidget {
                   icon: FeatherIcons.calendar,
                   onTap: () {
                     // context.read<ScheduleCubit>().get();
+                    context.read<ChooseDayCubit>().chooseDay(
+                          Helper().weekdayToString(DateTime.now().weekday),
+                        );
                     Navigator.pushNamed(context, Routes.schedule);
                   },
                 ),
@@ -209,7 +213,8 @@ class _AppMenuSection extends StatelessWidget {
                     var box = await Hive.openBox('app_config');
                     int _semester = box.get('semester');
                     String _tahunAkademik = box.get('tahunAkademik');
-                    context.read<KhsCubit>().get(_semester, _tahunAkademik);
+                    context.read<KhsCubit>().get(
+                        semester: _semester, tahunAkademik: _tahunAkademik);
                     Navigator.pushNamed(context, Routes.khs);
                   },
                 ),
@@ -233,16 +238,16 @@ class _AppMenuSection extends StatelessWidget {
 
 class _ScheduleSection extends StatelessWidget {
   final List<ScheduleModel> data;
-  final PageController controller;
 
-  const _ScheduleSection({
+  final PageController _controller = PageController(
+    viewportFraction: 0.5,
+    keepPage: false,
+  );
+
+  _ScheduleSection({
     Key? key,
     required this.data,
-    required this.controller,
-  })  : _controller = controller,
-        super(key: key);
-
-  final PageController _controller;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -271,7 +276,7 @@ class _ScheduleSection extends StatelessWidget {
         (data.isEmpty)
             ? Container(
                 width: double.maxFinite,
-                height: 150,
+                height: 170,
                 margin: const EdgeInsets.only(bottom: 32),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
