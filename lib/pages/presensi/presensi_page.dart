@@ -1,9 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:amikom_wan/cubit/presensi/send_qr/send_qr_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+import '../../routes.dart';
 
 class PresensiPage extends StatefulWidget {
   const PresensiPage({Key? key}) : super(key: key);
@@ -14,9 +18,9 @@ class PresensiPage extends StatefulWidget {
 
 class _PresensiPageState extends State<PresensiPage> {
   final GlobalKey _cameraKey = GlobalKey(debugLabel: 'QR SCANNER: ');
-  Barcode? result;
   bool isFrontCameraActive = false;
   bool isTorchActive = false;
+  String code = '';
 
   QRViewController? _controller;
 
@@ -45,7 +49,21 @@ class _PresensiPageState extends State<PresensiPage> {
           SizedBox.expand(
             child: QRView(
               key: _cameraKey,
-              onQRViewCreated: _onQRViewCreated,
+              onQRViewCreated: (controller) {
+                _controller = controller;
+                controller.scannedDataStream.listen((data) {
+                  log(data.format.toString());
+                  context.read<SendQrCubit>().sendQr(data.format.toString());
+                  if (Platform.isIOS) {
+                    _controller?.resumeCamera();
+                  } else if (Platform.isAndroid) {
+                    _controller?.pauseCamera();
+                  }
+                  Navigator.of(context)
+                      .pushReplacementNamed(Routes.presensiResult);
+                  log(context.read<SendQrCubit>().state.toString());
+                });
+              },
             ),
           ),
           const CameraOverlay(),
@@ -155,13 +173,6 @@ class _PresensiPageState extends State<PresensiPage> {
         ],
       ),
     );
-  }
-
-  void _onQRViewCreated(QRViewController controller) {
-    _controller = controller;
-    controller.scannedDataStream.listen((data) {
-      log(data.format.toString());
-    });
   }
 }
 

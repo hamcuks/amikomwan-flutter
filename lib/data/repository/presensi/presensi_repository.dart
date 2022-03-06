@@ -13,20 +13,41 @@ class PresensiRepository {
 
   PresensiRepository(this.dio);
 
-  // Future<Either<String, void>> presensi(String code, String npm) async {
-  //   try {} on DioError catch (e) {
-  //     log(e.message);
+  Future<Either<Response, bool>> sendQr(String code) async {
+    // open Hive box
+    var box = await Hive.box('credentials');
 
-  //     switch (e.type) {
-  //       case DioErrorType.connectTimeout:
-  //         return left('Gagal Login, Pastikan Terkoneksi ke Internet');
-  //       case DioErrorType.response:
-  //         return left('Gagal Login, Pastikan NIM dan Password Benar');
-  //       default:
-  //         return left(e.message);
-  //     }
-  //   }
-  // }
+    // get data npm
+    String npm = box.get('npm') ?? '';
+
+    // header
+    Options options = Options(headers: {
+      'User-Agent': userAgent,
+    });
+
+    // data
+    Map<String, dynamic> data = {
+      'data': '$code;$npm',
+    };
+
+    try {
+      Response response = await dio!.post(
+        'http://202.91.9.14:6000/api/presensi_mobile/validate_qr_code',
+        options: options,
+        data: data,
+      );
+
+      if (response.statusCode != 200) throw Error();
+
+      log(data.toString());
+
+      return right(true);
+    } on DioError catch (e) {
+      log(e.message);
+
+      return left(e.response!);
+    }
+  }
 
   Future<Either<String, List<DataPresensiModel>>> getDataPresensi() async {
     // access token

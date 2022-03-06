@@ -1,4 +1,7 @@
+import 'package:amikom_wan/cubit/presensi/send_qr/send_qr_cubit.dart';
+import 'package:amikom_wan/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 
 class PresensiResultPage extends StatelessWidget {
@@ -8,7 +11,28 @@ class PresensiResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SizedBox.expand(
-        child: _buildSuccess(context),
+        child: BlocConsumer<SendQrCubit, SendQrState>(
+          listener: (context, state) {
+            if (state is SendQrSuccess || state is SendQrError) {
+              Future.delayed(const Duration(seconds: 3), () {
+                Navigator.of(context).pushReplacementNamed(Routes.home);
+              });
+            }
+          },
+          builder: (context, state) {
+            if (state is SendQrSuccess) {
+              return _buildSuccess(context);
+            } else if (state is SendQrError) {
+              if (state.statusCode == 400) {
+                return _buildFailed(context);
+              } else {
+                return _buildWarning(context);
+              }
+            } else {
+              return _buildLoading(context);
+            }
+          },
+        ),
       ),
     );
   }
@@ -23,9 +47,9 @@ class PresensiResultPage extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
+          width: MediaQuery.of(context).size.width * 0.6,
           child: const Text(
-            'Maaf, Kamu sudah melakukan presensi sebelumnya',
+            'Waduh. Kalo udah presensi, gaperlu presensi lagi bor!',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -48,9 +72,9 @@ class PresensiResultPage extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
+          width: MediaQuery.of(context).size.width * 0.6,
           child: const Text(
-            'Yahhh, gagal presensi. Silahkan coba lagi ya!',
+            'Walah, gagal presensinya bor. Coba diulang ya!',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
@@ -73,9 +97,9 @@ class PresensiResultPage extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.8,
+          width: MediaQuery.of(context).size.width * 0.6,
           child: const Text(
-            'Yeayy, Berhasil presensi. Selamat mengikuti perkuliahan!',
+            'Yeayy, Berhasil presensi bor!. Jangan diskip kuliahnya ya!',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16,
