@@ -3,6 +3,7 @@ import 'package:amikom_wan/cubit/gpa_summary/gpa_summary_cubit.dart';
 import 'package:amikom_wan/cubit/khs/action/choose_semester/choose_semester_cubit.dart';
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/ktm/ktm_cubit.dart';
+import 'package:amikom_wan/cubit/presensi/data/data_presensi_cubit.dart';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => ChooseSemesterCubit()),
         BlocProvider(create: (_) => TranskripCubit()..get()),
         BlocProvider(create: (_) => KtmCubit()..get()),
+        BlocProvider(create: (_) => DataPresensiCubit()..get()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

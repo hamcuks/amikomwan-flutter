@@ -6,12 +6,14 @@ class MataKuliahDetail extends StatelessWidget {
   final dynamic data;
   final bool isTranskrip;
   final bool isKHS;
+  final bool isDataPresensi;
 
   const MataKuliahDetail({
     Key? key,
     this.data,
     this.isTranskrip = false,
     this.isKHS = false,
+    this.isDataPresensi = false,
   }) : super(key: key);
 
   @override
@@ -38,7 +40,7 @@ class MataKuliahDetail extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(24),
             child: (data != null)
-                ? (isKHS || isTranskrip)
+                ? (isKHS || isTranskrip || isDataPresensi)
                     ? Text(
                         Helper().toUpperCamelCase(data.namaMk),
                         style: const TextStyle(
@@ -73,10 +75,10 @@ class MataKuliahDetail extends StatelessWidget {
             child: Container(
               width: double.maxFinite,
               height: 54,
-              color: (!(isKHS || isTranskrip) &&
+              color: (!(isKHS || isTranskrip || isDataPresensi) &&
                       (data != null && data.jenisKuliah == 'Praktikum'))
                   ? const Color(0xFFFF8F3E)
-                  : const Color(0xFF442C79),
+                  : Color(0xFF432A79).withOpacity(.9),
               child: _buildContent(data),
             ),
           )
@@ -88,8 +90,20 @@ class MataKuliahDetail extends StatelessWidget {
   Widget _buildContent(dynamic data) {
     if (isKHS) return _buildKHS(data);
     if (isTranskrip) return _buildTranskrip(data);
+    if (isDataPresensi) return _buildDataPresensi(data);
 
     return _buildSchedule(data);
+  }
+
+  Row _buildDataPresensi(dynamic data) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _mataKuliahInfo('Kode', '${data?.kode ?? ""}'),
+        _mataKuliahInfo('SKS', '${data?.jmlSks ?? ""}'),
+        _mataKuliahInfo('Jumlah Presensi', '${data?.jmlPresensiKuliah ?? "-"}'),
+      ],
+    );
   }
 
   Row _buildKHS(dynamic data) {

@@ -1,7 +1,10 @@
+import 'package:amikom_wan/cubit/presensi/data/data_presensi_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../widget/mata_kuliah_detail_widget.dart';
 
 class DataPresensiPage extends StatelessWidget {
   const DataPresensiPage({Key? key}) : super(key: key);
@@ -33,11 +36,19 @@ class DataPresensiPage extends StatelessWidget {
             height: MediaQuery.of(context).size.height * .2,
             color: const Color(0xFF442C79),
           ),
-          Center(
-            child: Lottie.asset(
-              'assets/json/loading.json',
-              width: 250,
-            ),
+          BlocConsumer<DataPresensiCubit, DataPresensiState>(
+            builder: (context, state) {
+              return ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                itemCount: 5,
+                itemBuilder: (context, i) => MataKuliahDetail(
+                  isDataPresensi: true,
+                  data: (state is DataPresensiSuccess) ? state.data[i] : null,
+                ),
+              );
+            },
+            listener: (context, state) {},
           ),
         ],
       ),
