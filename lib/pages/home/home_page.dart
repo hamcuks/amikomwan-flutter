@@ -101,23 +101,27 @@ class HomePage extends StatelessWidget {
                     BlocBuilder<ScheduleCubit, ScheduleState>(
                         builder: (context, state) {
                       if (state is ScheduleLoading) {
-                        return Shimmer.fromColors(
-                          baseColor: const Color(0xFFEEEEEE),
-                          highlightColor: const Color(0xFFDADADA),
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 32),
-                              Container(
-                                width: double.maxFinite,
-                                height: 150,
-                                margin: const EdgeInsets.symmetric(vertical: 8),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  color: Colors.white,
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Shimmer.fromColors(
+                            baseColor: const Color(0xFFEEEEEE),
+                            highlightColor: const Color(0xFFDADADA),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 32),
+                                Container(
+                                  width: double.maxFinite,
+                                  height: 150,
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(4),
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 32),
-                            ],
+                                const SizedBox(height: 32),
+                              ],
+                            ),
                           ),
                         );
                       }
