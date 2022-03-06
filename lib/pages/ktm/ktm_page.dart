@@ -39,6 +39,7 @@ class KTMPage extends StatelessWidget {
         ),
       ),
       body: BlocBuilder<KtmCubit, KtmState>(
+        bloc: KtmCubit()..get(),
         builder: (context, state) {
           if (state is KtmSuccess) {
             return Center(

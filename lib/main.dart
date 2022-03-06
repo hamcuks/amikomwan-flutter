@@ -4,6 +4,7 @@ import 'package:amikom_wan/cubit/khs/action/choose_semester/choose_semester_cubi
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/cubit/ktm/ktm_cubit.dart';
 import 'package:amikom_wan/cubit/presensi/data/data_presensi_cubit.dart';
+import 'package:amikom_wan/cubit/presensi/send_qr/send_qr_cubit.dart';
 import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
 import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
@@ -15,6 +16,7 @@ import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
 import 'package:amikom_wan/pages/ktm/ktm_page.dart';
 import 'package:amikom_wan/pages/presensi/data/data_presensi_page.dart';
 import 'package:amikom_wan/pages/presensi/presensi_page.dart';
+import 'package:amikom_wan/pages/presensi/presensi_result_page.dart';
 import 'package:amikom_wan/pages/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -67,9 +69,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => AkademikCubit()..get()),
         BlocProvider(create: (_) => GpaSummaryCubit()),
         BlocProvider(create: (_) => ChooseSemesterCubit()),
-        BlocProvider(create: (_) => TranskripCubit()..get()),
-        BlocProvider(create: (_) => KtmCubit()..get()),
-        BlocProvider(create: (_) => DataPresensiCubit()..get()),
+        BlocProvider(create: (_) => TranskripCubit()),
+        BlocProvider(create: (_) => KtmCubit()),
+        BlocProvider(create: (_) => DataPresensiCubit()),
+        BlocProvider(create: (_) => SendQrCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -119,6 +122,10 @@ class MyApp extends StatelessWidget {
             case (Routes.scanQr):
               return MaterialPageRoute(
                 builder: (context) => const PresensiPage(),
+              );
+            case (Routes.presensiResult):
+              return MaterialPageRoute(
+                builder: (context) => const PresensiResultPage(),
               );
             default:
               return MaterialPageRoute(

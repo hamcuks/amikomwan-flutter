@@ -49,13 +49,27 @@ class MataKuliahDetail extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       )
-                    : Text(
-                        Helper().toUpperCamelCase(data.mataKuliah),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Color(0xFF442C79),
-                          fontWeight: FontWeight.bold,
-                        ),
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            Helper().toUpperCamelCase(data.mataKuliah),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Color(0xFF442C79),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            data.namaDosen,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF442C79).withOpacity(.8),
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ],
                       )
                 : Shimmer.fromColors(
                     baseColor: const Color(0xFFEEEEEE),

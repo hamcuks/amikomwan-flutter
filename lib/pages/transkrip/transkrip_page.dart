@@ -31,6 +31,7 @@ class TranskripPage extends StatelessWidget {
         ),
       ),
       body: BlocBuilder<TranskripCubit, TranskripState>(
+        bloc: TranskripCubit()..get(),
         builder: (context, state) {
           return Stack(
             children: [

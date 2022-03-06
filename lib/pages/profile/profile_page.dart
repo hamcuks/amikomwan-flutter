@@ -43,6 +43,7 @@ class ProfilePage extends StatelessWidget {
             color: const Color(0xFF442C79),
           ),
           BlocBuilder<ProfileCubit, ProfileState>(
+            bloc: ProfileCubit()..get(),
             builder: (context, state) {
               return ListView(
                 padding: const EdgeInsets.all(24),

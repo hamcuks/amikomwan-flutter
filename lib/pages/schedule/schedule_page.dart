@@ -8,6 +8,7 @@ import '../widget/mata_kuliah_detail_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widget/no_schedule_widget.dart';
 import 'widget/day_pill_widget.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -170,15 +171,7 @@ class _SchedulePageState extends State<SchedulePage> {
                               ),
                             ],
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Lottie.asset('assets/json/warning.json',
-                                  width: 72),
-                              const SizedBox(height: 8),
-                              const Text('Tidak Ada Jadwal'),
-                            ],
-                          ),
+                          child: const NoScheduleWidget(),
                         ),
                       );
                     }
