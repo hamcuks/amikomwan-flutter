@@ -14,7 +14,7 @@ class PresensiResultPage extends StatelessWidget {
         child: BlocConsumer<SendQrCubit, SendQrState>(
           listener: (context, state) {
             if (state is SendQrSuccess || state is SendQrError) {
-              Future.delayed(const Duration(seconds: 3), () {
+              Future.delayed(const Duration(seconds: 5), () {
                 Navigator.of(context).pushReplacementNamed(Routes.home);
               });
             }

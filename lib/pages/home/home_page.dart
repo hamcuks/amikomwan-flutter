@@ -100,7 +100,6 @@ class HomePage extends StatelessWidget {
                     // ),
                     SizedBox(height: size.height * 0.04),
                     BlocBuilder<ScheduleCubit, ScheduleState>(
-                      bloc: ScheduleCubit()..get(),
                       builder: (context, state) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

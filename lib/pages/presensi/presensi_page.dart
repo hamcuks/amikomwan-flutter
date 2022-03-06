@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:lottie/lottie.dart';
+
 import '../../cubit/presensi/send_qr/send_qr_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +46,7 @@ class _PresensiPageState extends State<PresensiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Stack(
         children: [
           SizedBox.expand(
@@ -53,20 +56,26 @@ class _PresensiPageState extends State<PresensiPage> {
                 _controller = controller;
                 controller.scannedDataStream.listen((data) {
                   log(data.format.toString());
-                  context.read<SendQrCubit>().sendQr(data.format.toString());
-                  if (Platform.isIOS) {
-                    _controller?.resumeCamera();
-                  } else if (Platform.isAndroid) {
-                    _controller?.pauseCamera();
-                  }
+
+                  code = data.code.toString();
+
+                  controller.stopCamera();
+
+                  context.read<SendQrCubit>().sendQr(code);
                   Navigator.of(context)
                       .pushReplacementNamed(Routes.presensiResult);
-                  log(context.read<SendQrCubit>().state.toString());
                 });
+                log(context.read<SendQrCubit>().state.toString());
               },
             ),
           ),
           const CameraOverlay(),
+          Center(
+            child: Opacity(
+              opacity: 0.5,
+              child: Lottie.asset('assets/json/scanner.json'),
+            ),
+          ),
           Positioned(
             top: 32,
             left: 0,
