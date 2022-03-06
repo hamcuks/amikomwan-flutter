@@ -55,13 +55,14 @@ class DayPill extends StatelessWidget {
                     duration: const Duration(
                       milliseconds: 300,
                     ),
-                    width: 24,
+                    width: 8,
                     height: 3,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: const Color(
-                          0xFFFF8F3E,
-                        )),
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(
+                        0xFFFF8F3E,
+                      ),
+                    ),
                   )
                 : const SizedBox(),
           ],

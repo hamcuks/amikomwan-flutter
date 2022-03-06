@@ -38,14 +38,23 @@ class MataKuliahDetail extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(24),
             child: (data != null)
-                ? Text(
-                    Helper().toUpperCamelCase(data.namaMk),
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Color(0xFF442C79),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
+                ? (isKHS || isTranskrip)
+                    ? Text(
+                        Helper().toUpperCamelCase(data.namaMk),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Color(0xFF442C79),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : Text(
+                        Helper().toUpperCamelCase(data.mataKuliah),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Color(0xFF442C79),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
                 : Shimmer.fromColors(
                     baseColor: const Color(0xFFEEEEEE),
                     highlightColor: const Color(0xFFDADADA),
@@ -64,7 +73,10 @@ class MataKuliahDetail extends StatelessWidget {
             child: Container(
               width: double.maxFinite,
               height: 54,
-              color: const Color(0xFF442C79),
+              color: (!(isKHS || isTranskrip) &&
+                      (data != null && data.jenisKuliah == 'Praktikum'))
+                  ? const Color(0xFFFF8F3E)
+                  : const Color(0xFF442C79),
               child: _buildContent(data),
             ),
           )
@@ -107,7 +119,8 @@ class MataKuliahDetail extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _mataKuliahInfo('Hari', '${data?.hari ?? ""}'),
+        _mataKuliahInfo(
+            'Hari', '${Helper().toUpperCamelCase(data?.hari ?? '')}'),
         _mataKuliahInfo('Jam', '${data?.waktu ?? ""}'),
         _mataKuliahInfo('Ruang', '${data?.ruang ?? ""}'),
         _mataKuliahInfo('Perkuliahan', '${data?.jenisKuliah ?? ""}'),
@@ -123,7 +136,7 @@ class MataKuliahDetail extends StatelessWidget {
           key,
           style: const TextStyle(
             fontSize: 10,
-            color: Color(0xFFA39CB8),
+            color: Color.fromARGB(255, 231, 231, 231),
           ),
         ),
         (value.isNotEmpty)

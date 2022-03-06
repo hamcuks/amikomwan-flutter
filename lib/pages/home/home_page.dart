@@ -8,6 +8,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../cubit/schedule/action/choose_day/choose_day_cubit.dart';
+import '../../helper/helper.dart';
 import '../widget/app_menu_item.dart';
 import '../../routes.dart';
 import 'package:feather_icons/feather_icons.dart';
@@ -17,34 +19,27 @@ import 'package:flutter/material.dart';
 import 'widget/schedule_card.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
-
-  final PageController _controller = PageController(
-    viewportFraction: 0.5,
-    keepPage: false,
-  );
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
             Stack(
               children: [
                 Container(
                   width: double.maxFinite,
-                  height: size.height * .43,
+                  height: size.height * .4,
                   color: const Color(0xFF432A79),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 54),
-                  child: Column(
-                    children: [
-                      Row(
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 54, 24, 0),
+                      child: Row(
                         children: [
                           const Text(
                             'Dashboard',
@@ -58,16 +53,20 @@ class HomePage extends StatelessWidget {
                           BlocBuilder<ProfileCubit, ProfileState>(
                             builder: (context, state) {
                               if (state is ProfileSuccess) {
-                                return Container(
-                                  width: 32,
-                                  height: 32,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFF3F3F3),
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          '${state.data.mhs!.npmImg}'),
+                                return GestureDetector(
+                                  onTap: () => Navigator.pushNamed(
+                                      context, Routes.profile),
+                                  child: Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFF3F3F3),
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            '${state.data.mhs!.npmImg}'),
+                                      ),
                                     ),
                                   ),
                                 );
@@ -76,12 +75,16 @@ class HomePage extends StatelessWidget {
                               return Shimmer.fromColors(
                                 baseColor: const Color(0xFFEEEEEE),
                                 highlightColor: const Color(0xFFDADADA),
-                                child: Container(
-                                  width: 32,
-                                  height: 32,
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xFFF3F3F3),
-                                    shape: BoxShape.circle,
+                                child: GestureDetector(
+                                  onTap: () => Navigator.pushNamed(
+                                      context, Routes.profile),
+                                  child: Container(
+                                    width: 32,
+                                    height: 32,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFFF3F3F3),
+                                      shape: BoxShape.circle,
+                                    ),
                                   ),
                                 ),
                               );
@@ -89,20 +92,15 @@ class HomePage extends StatelessWidget {
                           )
                         ],
                       ),
-                      // const SizedBox(height: 32),
-                      // const LiveClassCard(
-                      //   kelas: 'Pemrograman Web lanjut',
-                      // ),
-                      SizedBox(height: size.height * 0.02),
-                      BlocBuilder<ScheduleCubit, ScheduleState>(
-                          builder: (context, state) {
-                        if (state is ScheduleSuccess) {
-                          return _ScheduleSection(
-                            controller: _controller,
-                            data: state.data,
-                          );
-                        }
-
+                    ),
+                    // const SizedBox(height: 32),
+                    // const LiveClassCard(
+                    //   kelas: 'Pemrograman Web lanjut',
+                    // ),
+                    SizedBox(height: size.height * 0.04),
+                    BlocBuilder<ScheduleCubit, ScheduleState>(
+                        builder: (context, state) {
+                      if (state is ScheduleLoading) {
                         return Shimmer.fromColors(
                           baseColor: const Color(0xFFEEEEEE),
                           highlightColor: const Color(0xFFDADADA),
@@ -122,11 +120,21 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         );
-                      }),
-                      SizedBox(height: size.height * 0.02),
-                      const _AppMenuSection()
-                    ],
-                  ),
+                      }
+                      return _ScheduleSection(
+                        data: (state is ScheduleSuccess)
+                            ? state.data
+                                .where((element) =>
+                                    element.idHari == DateTime.now().weekday)
+                                .toList()
+                            : <ScheduleModel>[],
+                      );
+                    }),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(24, 16, 24, 24),
+                      child: _AppMenuSection(),
+                    )
+                  ],
                 )
               ],
             )
@@ -157,7 +165,7 @@ class _AppMenuSection extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
               children: [
@@ -167,6 +175,36 @@ class _AppMenuSection extends StatelessWidget {
                   isGradient: true,
                   onTap: () {
                     Navigator.pushNamed(context, Routes.scanQr);
+                  },
+                ),
+                const SizedBox(height: 24),
+                AppMenuItem(
+                  menuName: 'KHS',
+                  icon: FeatherIcons.fileMinus,
+                  onTap: () async {
+                    var box = await Hive.openBox('app_config');
+                    int _semester = box.get('semester');
+                    String _tahunAkademik = box.get('tahunAkademik');
+                    context.read<KhsCubit>().get(_semester, _tahunAkademik);
+                    Navigator.pushNamed(context, Routes.khs);
+                  },
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                AppMenuItem(
+                  menuName: 'Jadwal',
+                  icon: FeatherIcons.calendar,
+                  onTap: () {
+                    // context.read<ScheduleCubit>().get();
+                    int _day = DateTime.now().weekday;
+
+                    if (_day == 7) _day -= 1;
+                    context
+                        .read<ChooseDayCubit>()
+                        .chooseDay(Helper().weekdayToString(_day));
+                    Navigator.pushNamed(context, Routes.schedule);
                   },
                 ),
                 const SizedBox(height: 24),
@@ -183,11 +221,10 @@ class _AppMenuSection extends StatelessWidget {
             Column(
               children: [
                 AppMenuItem(
-                  menuName: 'Jadwal',
-                  icon: FeatherIcons.calendar,
-                  onTap: () {
-                    // context.read<ScheduleCubit>().get();
-                    Navigator.pushNamed(context, Routes.schedule);
+                  menuName: 'Data Presensi',
+                  icon: FeatherIcons.barChart2,
+                  onTap: () async {
+                    Navigator.pushNamed(context, Routes.dataPresensi);
                   },
                 ),
                 const SizedBox(height: 24),
@@ -196,30 +233,6 @@ class _AppMenuSection extends StatelessWidget {
                   icon: FeatherIcons.creditCard,
                   onTap: () {
                     Navigator.pushNamed(context, Routes.ktm);
-                  },
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                AppMenuItem(
-                  menuName: 'KHS',
-                  icon: FeatherIcons.fileMinus,
-                  onTap: () async {
-                    var box = await Hive.openBox('app_config');
-                    int _semester = box.get('semester');
-                    String _tahunAkademik = box.get('tahunAkademik');
-                    context.read<KhsCubit>().get(_semester, _tahunAkademik);
-                    Navigator.pushNamed(context, Routes.khs);
-                  },
-                ),
-                const SizedBox(height: 24),
-                AppMenuItem(
-                  menuName: 'Profile',
-                  icon: FeatherIcons.user,
-                  onTap: () {
-                    // context.read<ProfileCubit>().get();
-                    Navigator.pushNamed(context, Routes.profile);
                   },
                 ),
               ],
@@ -233,46 +246,50 @@ class _AppMenuSection extends StatelessWidget {
 
 class _ScheduleSection extends StatelessWidget {
   final List<ScheduleModel> data;
-  final PageController controller;
 
-  const _ScheduleSection({
+  final PageController _controller = PageController(
+    viewportFraction: 0.5,
+    keepPage: true,
+  );
+
+  _ScheduleSection({
     Key? key,
     required this.data,
-    required this.controller,
-  })  : _controller = controller,
-        super(key: key);
-
-  final PageController _controller;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            const Text(
-              'Jadwal Hari Ini',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFFFAFAFA),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+          child: Row(
+            children: [
+              const Text(
+                'Jadwal Hari Ini',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFFFAFAFA),
+                ),
               ),
-            ),
-            const Spacer(),
-            IconButton(
-              onPressed: () => Navigator.of(context).pushNamed(Routes.schedule),
-              color: const Color(0xFFFAFAFA),
-              icon: const Icon(CupertinoIcons.arrow_right),
-            )
-          ],
+              const Spacer(),
+              IconButton(
+                onPressed: () =>
+                    Navigator.of(context).pushNamed(Routes.schedule),
+                color: const Color(0xFFFAFAFA),
+                icon: const Icon(CupertinoIcons.arrow_right),
+              )
+            ],
+          ),
         ),
         const SizedBox(height: 16),
         (data.isEmpty)
             ? Container(
                 width: double.maxFinite,
-                height: 150,
-                margin: const EdgeInsets.only(bottom: 32),
+                height: 170,
+                margin: const EdgeInsets.only(bottom: 32, left: 24, right: 24),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                   color: Colors.white,
@@ -301,7 +318,8 @@ class _ScheduleSection extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
                   itemCount: data.length,
-                  itemBuilder: (context, i) => ScheduleCard(data: data[i]),
+                  itemBuilder: (context, i) => ScheduleCard(
+                      data: data[i], position: i, length: data.length),
                 ),
               )
       ],
