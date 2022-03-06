@@ -174,6 +174,7 @@ class ProfilePage extends StatelessWidget {
                         ProfileItem(
                           icon: FeatherIcons.atSign,
                           title: 'Email',
+                          isSelectable: true,
                           data: (state is ProfileSuccess)
                               ? '${state.data.mhs!.emailAmikom}'
                               : '',
@@ -183,6 +184,7 @@ class ProfilePage extends StatelessWidget {
                             return ProfileItem(
                               icon: FeatherIcons.key,
                               title: 'Password',
+                              isSelectable: passwordState,
                               suffixIcon: (!passwordState)
                                   ? FeatherIcons.eye
                                   : FeatherIcons.eyeOff,
