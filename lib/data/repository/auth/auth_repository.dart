@@ -1,5 +1,5 @@
-import 'package:amikom_wan/common/constant.dart';
-import 'package:amikom_wan/data/model/auth/login_model.dart';
+import '../../../common/constant.dart';
+import '../../model/auth/login_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 

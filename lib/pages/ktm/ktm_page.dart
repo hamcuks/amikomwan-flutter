@@ -1,22 +1,11 @@
-import 'dart:convert';
-import 'dart:developer';
-
-import 'package:amikom_wan/cubit/ktm/ktm_cubit.dart';
-import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
-import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
-import 'package:amikom_wan/data/model/khs/akademik/akademik_model.dart';
-import 'package:amikom_wan/data/model/profile/profile_model.dart';
-import 'package:amikom_wan/data/repository/khs/khs_repository.dart';
-import 'package:amikom_wan/pages/widget/app_button.dart';
-import 'package:dio/dio.dart';
+import '../../cubit/ktm/ktm_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 
 class KTMPage extends StatelessWidget {
-  KTMPage({Key? key}) : super(key: key);
+  const KTMPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,11 @@
 import 'dart:developer';
 
-import 'package:amikom_wan/data/model/khs/khs_model.dart';
-import 'package:amikom_wan/data/repository/khs/khs_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../data/model/khs/khs_model.dart';
+import '../../data/repository/khs/khs_repository.dart';
 
 part 'khs_state.dart';
 

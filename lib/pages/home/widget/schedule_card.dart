@@ -1,4 +1,4 @@
-import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
+import '../../../data/model/schedule/schedule_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../helper/helper.dart';

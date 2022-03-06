@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
-import 'package:amikom_wan/data/repository/schedule/schedule_repository.dart';
+import '../../data/model/schedule/schedule_model.dart';
+import '../../data/repository/schedule/schedule_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';

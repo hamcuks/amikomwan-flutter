@@ -1,4 +1,4 @@
-import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
+import '../../cubit/transkrip/transkrip_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widget/mata_kuliah_detail_widget.dart';

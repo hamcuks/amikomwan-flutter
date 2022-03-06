@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:amikom_wan/common/constant.dart';
-import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
-import 'package:amikom_wan/helper/helper.dart';
+import '../../../common/constant.dart';
+import '../../model/schedule/schedule_model.dart';
+import '../../../helper/helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';

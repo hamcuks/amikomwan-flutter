@@ -1,5 +1,5 @@
-import 'package:amikom_wan/cubit/presensi/send_qr/send_qr_cubit.dart';
-import 'package:amikom_wan/routes.dart';
+import '../../cubit/presensi/send_qr/send_qr_cubit.dart';
+import '../../routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';

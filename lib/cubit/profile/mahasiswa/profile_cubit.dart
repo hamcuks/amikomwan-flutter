@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:amikom_wan/data/model/profile/profile_model.dart';
-import 'package:amikom_wan/data/repository/profile/profile_repository.dart';
-import 'package:amikom_wan/helper/helper.dart';
+import '../../../data/model/profile/profile_model.dart';
+import '../../../data/repository/profile/profile_repository.dart';
+import '../../../helper/helper.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';

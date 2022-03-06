@@ -1,4 +1,4 @@
-import 'package:amikom_wan/cubit/gpa_summary/gpa_summary_cubit.dart';
+import '../../cubit/gpa_summary/gpa_summary_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';

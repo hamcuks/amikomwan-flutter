@@ -1,7 +1,6 @@
-import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
-import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
-import 'package:amikom_wan/routes.dart';
-import 'package:flutter/foundation.dart';
+import '../cubit/auth/auth_cubit.dart';
+import '../cubit/splash/splash_cubit.dart';
+import '../routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';

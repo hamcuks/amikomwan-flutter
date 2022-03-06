@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:amikom_wan/cubit/presensi/send_qr/send_qr_cubit.dart';
+import '../../cubit/presensi/send_qr/send_qr_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
