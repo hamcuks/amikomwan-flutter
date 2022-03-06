@@ -8,7 +8,6 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'widget/profile_item_widget.dart';
@@ -163,7 +162,7 @@ class ProfilePage extends StatelessWidget {
                           padding: const EdgeInsets.all(24),
                           color: const Color(0xFFF2F8FD),
                           child: const Text(
-                            'Data Mahasiswa',
+                            'Data Email',
                             style: TextStyle(
                               fontSize: 12,
                               color: Color(0xFF756D8D),

@@ -7,8 +7,6 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../../helper/helper.dart';
-
 part 'akademik_state.dart';
 
 class AkademikCubit extends Cubit<AkademikState> {
@@ -27,7 +25,7 @@ class AkademikCubit extends Cubit<AkademikState> {
       log(data.toJson().toString());
       emit(AkademikSuccess(data));
     } catch (e) {
-      emit(AkademikError('Gagal Mendapatkan data'));
+      emit(const AkademikError('Gagal Mendapatkan data'));
     }
   }
 }

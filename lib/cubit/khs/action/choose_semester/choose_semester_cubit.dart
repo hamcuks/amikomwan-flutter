@@ -1,6 +1,5 @@
 import 'package:amikom_wan/data/model/profile/profile_model.dart';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class ChooseSemesterCubit extends Cubit<int> {

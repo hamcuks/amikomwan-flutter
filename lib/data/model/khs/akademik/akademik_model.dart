@@ -16,24 +16,24 @@ class AkademikModel {
     if (json['Tahun'] != null) {
       tahun = <Tahun>[];
       json['Tahun'].forEach((v) {
-        tahun!.add(new Tahun.fromJson(v));
+        tahun!.add(Tahun.fromJson(v));
       });
     }
     if (json['Semester'] != null) {
       semester = <Semester>[];
       json['Semester'].forEach((v) {
-        semester!.add(new Semester.fromJson(v));
+        semester!.add(Semester.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.tahun != null) {
-      data['Tahun'] = this.tahun!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (tahun != null) {
+      data['Tahun'] = tahun!.map((v) => v.toJson()).toList();
     }
-    if (this.semester != null) {
-      data['Semester'] = this.semester!.map((v) => v.toJson()).toList();
+    if (semester != null) {
+      data['Semester'] = semester!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -51,8 +51,8 @@ class Tahun {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['thn_ajaran'] = this.thnAjaran;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['thn_ajaran'] = thnAjaran;
     return data;
   }
 }
@@ -73,9 +73,9 @@ class Semester {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['Kode'] = this.kode;
-    data['Nama'] = this.nama;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Kode'] = kode;
+    data['Nama'] = nama;
     return data;
   }
 }

@@ -1,12 +1,12 @@
 import 'dart:developer';
 
-import 'package:amikom_wan/cubit/khs/action/cubit/akademik_cubit.dart';
 import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
 import 'package:amikom_wan/data/model/khs/akademik/akademik_model.dart';
 import 'package:amikom_wan/pages/widget/app_drop_down.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../cubit/khs/action/akademik/akademik_cubit.dart';
 import '../widget/mata_kuliah_detail_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
