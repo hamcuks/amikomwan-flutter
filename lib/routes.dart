@@ -4,6 +4,7 @@ class Routes {
   static const home = '/home';
   static const schedule = '/schedule';
   static const scanQr = '/scan-qr';
+  static const dataPresensi = '/data-presensi';
   static const khs = '/khs';
   static const transkrip = '/transkrip';
   static const ktm = '/ktm';

@@ -12,6 +12,7 @@ import 'package:amikom_wan/data/model/khs/akademik/akademik_model.dart';
 import 'package:amikom_wan/data/model/profile/profile_model.dart';
 import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
 import 'package:amikom_wan/pages/ktm/ktm_page.dart';
+import 'package:amikom_wan/pages/presensi/data/data_presensi_page.dart';
 import 'package:amikom_wan/pages/presensi/presensi_page.dart';
 import 'package:amikom_wan/pages/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -87,11 +88,15 @@ class MyApp extends StatelessWidget {
               );
             case (Routes.home):
               return MaterialPageRoute(
-                builder: (context) => HomePage(),
+                builder: (context) => const HomePage(),
               );
             case (Routes.schedule):
               return MaterialPageRoute(
                 builder: (context) => SchedulePage(),
+              );
+            case (Routes.dataPresensi):
+              return MaterialPageRoute(
+                builder: (context) => const DataPresensiPage(),
               );
             case (Routes.khs):
               return MaterialPageRoute(

@@ -1,6 +1,7 @@
 import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
 import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
 import 'package:amikom_wan/routes.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -24,6 +25,7 @@ class SplashPage extends StatelessWidget {
                 String password = box.get('password');
 
                 context.read<AuthCubit>().login(npm, password);
+                context.read<AuthCubit>().authPresensi(npm, password);
 
                 Navigator.pushReplacementNamed(context, Routes.home);
               }
@@ -33,8 +35,9 @@ class SplashPage extends StatelessWidget {
         builder: (context, state) {
           return SizedBox(
             width: double.maxFinite,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            height: double.maxFinite,
+            child: Stack(
+              alignment: Alignment.center,
               children: [
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
@@ -46,8 +49,10 @@ class SplashPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                Lottie.asset('assets/json/loading.json', width: 150),
+                Positioned(
+                  bottom: 72,
+                  child: Lottie.asset('assets/json/loading.json', width: 150),
+                ),
               ],
             ),
           );
