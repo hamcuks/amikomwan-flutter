@@ -16,7 +16,7 @@ class DataPresensiCubit extends Cubit<DataPresensiState> {
 
     var repository = await PresensiRepository(Dio()).getDataPresensi();
 
-    repository.fold((l) => log(l), (data) {
+    repository.fold((l) => emit(DataPresensiError(l)), (data) {
       emit(DataPresensiSuccess(data));
     });
   }

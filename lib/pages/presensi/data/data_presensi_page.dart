@@ -37,6 +37,7 @@ class DataPresensiPage extends StatelessWidget {
             color: const Color(0xFF442C79),
           ),
           BlocConsumer<DataPresensiCubit, DataPresensiState>(
+            bloc: DataPresensiCubit()..get(),
             builder: (context, state) {
               return ListView.builder(
                 physics: const BouncingScrollPhysics(),
