@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:amikom_wan/data/model/transkrip/transkrip_model.dart';
-import 'package:amikom_wan/data/repository/transkrip/transkrip_repository.dart';
+import '../../data/model/transkrip/transkrip_model.dart';
+import '../../data/repository/transkrip/transkrip_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';

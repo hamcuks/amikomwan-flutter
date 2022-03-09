@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:amikom_wan/data/model/khs/akademik/akademik_model.dart';
-import 'package:amikom_wan/data/repository/khs/khs_repository.dart';
+import '../../../../data/model/khs/akademik/akademik_model.dart';
+import '../../../../data/repository/khs/khs_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';

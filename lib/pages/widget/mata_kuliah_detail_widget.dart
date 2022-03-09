@@ -1,4 +1,4 @@
-import 'package:amikom_wan/helper/helper.dart';
+import '../../helper/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -65,7 +65,7 @@ class MataKuliahDetail extends StatelessWidget {
                             data.namaDosen,
                             style: TextStyle(
                               fontSize: 12,
-                              color: Color(0xFF442C79).withOpacity(.8),
+                              color: const Color(0xFF442C79).withOpacity(.8),
                               fontWeight: FontWeight.normal,
                             ),
                           ),
@@ -92,7 +92,7 @@ class MataKuliahDetail extends StatelessWidget {
               color: (!(isKHS || isTranskrip || isDataPresensi) &&
                       (data != null && data.jenisKuliah == 'Praktikum'))
                   ? const Color(0xFFFF8F3E)
-                  : Color(0xFF432A79).withOpacity(.9),
+                  : const Color(0xFF432A79).withOpacity(.9),
               child: _buildContent(data),
             ),
           )
@@ -147,8 +147,7 @@ class MataKuliahDetail extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _mataKuliahInfo(
-            'Hari', '${Helper().toUpperCamelCase(data?.hari ?? '')}'),
+        _mataKuliahInfo('Hari', Helper().toUpperCamelCase(data?.hari ?? '')),
         _mataKuliahInfo('Jam', '${data?.waktu ?? ""}'),
         _mataKuliahInfo('Ruang', '${data?.ruang ?? ""}'),
         _mataKuliahInfo('Perkuliahan', '${data?.jenisKuliah ?? ""}'),

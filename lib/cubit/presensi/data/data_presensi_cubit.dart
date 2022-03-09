@@ -1,7 +1,5 @@
-import 'dart:developer';
-
-import 'package:amikom_wan/data/model/auth/presensi/data_presensi_model.dart';
-import 'package:amikom_wan/data/repository/presensi/presensi_repository.dart';
+import '../../../data/model/auth/presensi/data_presensi_model.dart';
+import '../../../data/repository/presensi/presensi_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';

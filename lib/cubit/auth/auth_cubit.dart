@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:amikom_wan/data/repository/auth/auth_repository.dart';
-import 'package:amikom_wan/helper/helper.dart';
+import '../../data/repository/auth/auth_repository.dart';
+import '../../helper/helper.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';

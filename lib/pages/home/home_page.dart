@@ -1,11 +1,10 @@
-import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
-import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
-import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
-import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
-import 'package:amikom_wan/pages/home/widget/live_class_card.dart';
+import '../../cubit/khs/khs_cubit.dart';
+import '../../cubit/profile/mahasiswa/profile_cubit.dart';
+import '../../cubit/schedule/schedule_cubit.dart';
+import '../../data/model/schedule/schedule_model.dart';
+import 'widget/live_class_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../cubit/schedule/action/choose_day/choose_day_cubit.dart';
@@ -101,7 +100,6 @@ class HomePage extends StatelessWidget {
                     // ),
                     SizedBox(height: size.height * 0.04),
                     BlocBuilder<ScheduleCubit, ScheduleState>(
-                      bloc: ScheduleCubit()..get(),
                       builder: (context, state) {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,89 +320,6 @@ class _AppMenuSection extends StatelessWidget {
             ),
           ],
         ),
-      ],
-    );
-  }
-}
-
-class _ScheduleSection extends StatelessWidget {
-  final List<ScheduleModel> data;
-
-  final PageController _controller = PageController(
-    viewportFraction: 0.5,
-    keepPage: true,
-  );
-
-  _ScheduleSection({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-          child: Row(
-            children: [
-              const Text(
-                'Jadwal Hari Ini',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFFFAFAFA),
-                ),
-              ),
-              const Spacer(),
-              IconButton(
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(Routes.schedule),
-                color: const Color(0xFFFAFAFA),
-                icon: const Icon(CupertinoIcons.arrow_right),
-              )
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
-        (data.isEmpty)
-            ? Container(
-                width: double.maxFinite,
-                height: 170,
-                margin: const EdgeInsets.only(bottom: 32, left: 24, right: 24),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF686B6D).withOpacity(0.1),
-                      offset: const Offset(5, 5),
-                      blurRadius: 19,
-                      spreadRadius: 2,
-                    ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Lottie.asset('assets/json/warning.json', width: 54),
-                    const SizedBox(height: 8),
-                    const Text('Tidak Ada Jadwal'),
-                  ],
-                ),
-              )
-            : SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  controller: _controller,
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: data.length,
-                  itemBuilder: (context, i) => ScheduleCard(
-                      data: data[i], position: i, length: data.length),
-                ),
-              )
       ],
     );
   }

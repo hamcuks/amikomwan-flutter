@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:amikom_wan/data/model/ktm/ktm_model.dart';
+import '../../model/ktm/ktm_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';

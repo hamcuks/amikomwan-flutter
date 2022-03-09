@@ -6,6 +6,7 @@ class ProfileItem extends StatelessWidget {
   final String data;
   final IconData icon;
   final IconData? suffixIcon;
+  final bool isSelectable;
   final VoidCallback? suffixAction;
 
   const ProfileItem({
@@ -15,6 +16,7 @@ class ProfileItem extends StatelessWidget {
     required this.icon,
     this.suffixIcon,
     this.suffixAction,
+    this.isSelectable = false,
   }) : super(key: key);
 
   @override
@@ -45,13 +47,21 @@ class ProfileItem extends StatelessWidget {
                   ? FittedBox(
                       clipBehavior: Clip.hardEdge,
                       fit: BoxFit.fitWidth,
-                      child: Text(
-                        data,
-                        style: const TextStyle(
-                          color: Color(0xFF756D8D),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      child: (isSelectable)
+                          ? SelectableText(
+                              data,
+                              style: const TextStyle(
+                                color: Color(0xFF756D8D),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          : Text(
+                              data,
+                              style: const TextStyle(
+                                color: Color(0xFF756D8D),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                     )
                   : Shimmer.fromColors(
                       baseColor: const Color(0xFFEEEEEE),

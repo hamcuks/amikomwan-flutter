@@ -15,7 +15,7 @@ class PresensiRepository {
 
   Future<Either<Response, bool>> sendQr(String code) async {
     // open Hive box
-    var box = await Hive.box('credentials');
+    var box = await Hive.openBox('credentials');
 
     // get data npm
     String npm = box.get('npm') ?? '';

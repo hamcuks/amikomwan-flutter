@@ -1,9 +1,9 @@
-import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
-import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
-import 'package:amikom_wan/cubit/profile/mahasiswa/profile_cubit.dart';
-import 'package:amikom_wan/helper/helper.dart';
-import 'package:amikom_wan/pages/widget/app_button.dart';
-import 'package:amikom_wan/routes.dart';
+import '../../cubit/auth/auth_cubit.dart';
+import '../../cubit/profile/action/profile_action_cubit.dart';
+import '../../cubit/profile/mahasiswa/profile_cubit.dart';
+import '../../helper/helper.dart';
+import '../widget/app_button.dart';
+import '../../routes.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -174,6 +174,7 @@ class ProfilePage extends StatelessWidget {
                         ProfileItem(
                           icon: FeatherIcons.atSign,
                           title: 'Email',
+                          isSelectable: true,
                           data: (state is ProfileSuccess)
                               ? '${state.data.mhs!.emailAmikom}'
                               : '',
@@ -183,6 +184,7 @@ class ProfilePage extends StatelessWidget {
                             return ProfileItem(
                               icon: FeatherIcons.key,
                               title: 'Password',
+                              isSelectable: passwordState,
                               suffixIcon: (!passwordState)
                                   ? FeatherIcons.eye
                                   : FeatherIcons.eyeOff,

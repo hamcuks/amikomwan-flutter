@@ -1,27 +1,28 @@
 import 'dart:async';
 
-import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
-import 'package:amikom_wan/cubit/gpa_summary/gpa_summary_cubit.dart';
-import 'package:amikom_wan/cubit/khs/action/choose_semester/choose_semester_cubit.dart';
-import 'package:amikom_wan/cubit/khs/khs_cubit.dart';
-import 'package:amikom_wan/cubit/ktm/ktm_cubit.dart';
-import 'package:amikom_wan/cubit/presensi/data/data_presensi_cubit.dart';
-import 'package:amikom_wan/cubit/presensi/send_qr/send_qr_cubit.dart';
-import 'package:amikom_wan/cubit/profile/action/profile_action_cubit.dart';
-import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
-import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
-import 'package:amikom_wan/cubit/splash/splash_cubit.dart';
-import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
-import 'package:amikom_wan/data/model/khs/akademik/akademik_model.dart';
-import 'package:amikom_wan/data/model/profile/profile_model.dart';
-import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
-import 'package:amikom_wan/data/repository/auth/auth_repository.dart';
-import 'package:amikom_wan/pages/ktm/ktm_page.dart';
-import 'package:amikom_wan/pages/presensi/data/data_presensi_page.dart';
-import 'package:amikom_wan/pages/presensi/presensi_page.dart';
-import 'package:amikom_wan/pages/presensi/presensi_result_page.dart';
-import 'package:amikom_wan/pages/splash_page.dart';
 import 'package:dio/dio.dart';
+
+import 'cubit/auth/auth_cubit.dart';
+import 'cubit/gpa_summary/gpa_summary_cubit.dart';
+import 'cubit/khs/action/choose_semester/choose_semester_cubit.dart';
+import 'cubit/khs/khs_cubit.dart';
+import 'cubit/ktm/ktm_cubit.dart';
+import 'cubit/presensi/data/data_presensi_cubit.dart';
+import 'cubit/presensi/send_qr/send_qr_cubit.dart';
+import 'cubit/profile/action/profile_action_cubit.dart';
+import 'cubit/schedule/action/choose_day/choose_day_cubit.dart';
+import 'cubit/schedule/schedule_cubit.dart';
+import 'cubit/splash/splash_cubit.dart';
+import 'cubit/transkrip/transkrip_cubit.dart';
+import 'data/model/khs/akademik/akademik_model.dart';
+import 'data/model/profile/profile_model.dart';
+import 'data/model/schedule/schedule_model.dart';
+import 'data/repository/auth/auth_repository.dart';
+import 'pages/ktm/ktm_page.dart';
+import 'pages/presensi/data/data_presensi_page.dart';
+import 'pages/presensi/presensi_page.dart';
+import 'pages/presensi/presensi_result_page.dart';
+import 'pages/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -112,7 +113,7 @@ class MyApp extends StatelessWidget {
               );
             case (Routes.schedule):
               return MaterialPageRoute(
-                builder: (context) => SchedulePage(),
+                builder: (context) => const SchedulePage(),
               );
             case (Routes.dataPresensi):
               return MaterialPageRoute(
@@ -128,7 +129,7 @@ class MyApp extends StatelessWidget {
               );
             case (Routes.ktm):
               return MaterialPageRoute(
-                builder: (context) => KTMPage(),
+                builder: (context) => const KTMPage(),
               );
             case (Routes.profile):
               return MaterialPageRoute(

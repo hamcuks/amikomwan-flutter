@@ -1,18 +1,17 @@
-import 'package:amikom_wan/cubit/schedule/action/choose_day/choose_day_cubit.dart';
-import 'package:amikom_wan/cubit/schedule/schedule_cubit.dart';
-import 'package:amikom_wan/helper/helper.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
-
+import '../../cubit/schedule/action/choose_day/choose_day_cubit.dart';
+import '../../cubit/schedule/schedule_cubit.dart';
+import '../../helper/helper.dart';
 import '../widget/mata_kuliah_detail_widget.dart';
+import '../widget/no_schedule_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../widget/no_schedule_widget.dart';
 import 'widget/day_pill_widget.dart';
 
 class SchedulePage extends StatefulWidget {
-  SchedulePage({Key? key}) : super(key: key);
+  const SchedulePage({Key? key}) : super(key: key);
 
   @override
   State<SchedulePage> createState() => _SchedulePageState();
