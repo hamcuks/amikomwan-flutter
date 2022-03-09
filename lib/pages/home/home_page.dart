@@ -287,9 +287,7 @@ class _AppMenuSection extends StatelessWidget {
                     int _day = DateTime.now().weekday;
 
                     if (_day == 7) _day -= 1;
-                    context
-                        .read<ChooseDayCubit>()
-                        .chooseDay(Helper().weekdayToString(_day));
+                    context.read<ChooseDayCubit>().chooseDay(_day);
                     Navigator.pushNamed(context, Routes.schedule);
                   },
                 ),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amikom_wan/cubit/auth/auth_cubit.dart';
 import 'package:amikom_wan/cubit/gpa_summary/gpa_summary_cubit.dart';
 import 'package:amikom_wan/cubit/khs/action/choose_semester/choose_semester_cubit.dart';
@@ -13,11 +15,13 @@ import 'package:amikom_wan/cubit/transkrip/transkrip_cubit.dart';
 import 'package:amikom_wan/data/model/khs/akademik/akademik_model.dart';
 import 'package:amikom_wan/data/model/profile/profile_model.dart';
 import 'package:amikom_wan/data/model/schedule/schedule_model.dart';
+import 'package:amikom_wan/data/repository/auth/auth_repository.dart';
 import 'package:amikom_wan/pages/ktm/ktm_page.dart';
 import 'package:amikom_wan/pages/presensi/data/data_presensi_page.dart';
 import 'package:amikom_wan/pages/presensi/presensi_page.dart';
 import 'package:amikom_wan/pages/presensi/presensi_result_page.dart';
 import 'package:amikom_wan/pages/splash_page.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -36,10 +40,21 @@ import 'pages/schedule/schedule_page.dart';
 void main() async {
   await Hive.initFlutter();
   registerAdapters();
-  await Hive.openBox('app_config');
-  await Hive.openBox('credentials');
-
+  periodicTask();
   runApp(const MyApp());
+}
+
+void periodicTask() async {
+  await Hive.openBox('app_config');
+  var box = await Hive.openBox('credentials');
+
+  String npm = box.get('npm');
+  String password = box.get('password');
+
+  Timer.periodic(const Duration(hours: 1), (timer) {
+    AuthRepository(Dio()).login(npm, password);
+    AuthRepository(Dio()).loginPresensi(npm, password);
+  });
 }
 
 void registerAdapters() {

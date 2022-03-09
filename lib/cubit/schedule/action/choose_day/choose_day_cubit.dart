@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 
-class ChooseDayCubit extends Cubit<String> {
-  ChooseDayCubit() : super("senin");
+class ChooseDayCubit extends Cubit<int> {
+  ChooseDayCubit() : super(1);
 
-  void chooseDay(String day) {
+  void chooseDay(int day) {
     emit(day);
   }
 }

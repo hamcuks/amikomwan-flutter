@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:amikom_wan/common/constant.dart';
 import 'package:amikom_wan/data/model/auth/login_model.dart';
 import 'package:dartz/dartz.dart';
@@ -27,6 +29,8 @@ class AuthRepository {
         options: options,
         data: data,
       );
+
+      log(response.data.toString());
 
       if (response.statusCode != 200) throw Error();
 
@@ -65,6 +69,8 @@ class AuthRepository {
         options: options,
         data: data,
       );
+
+      log(response.data.toString());
 
       if (response.statusCode != 200) throw Error();
 

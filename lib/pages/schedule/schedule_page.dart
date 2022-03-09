@@ -53,9 +53,7 @@ class _SchedulePageState extends State<SchedulePage> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
-            context.read<ChooseDayCubit>().chooseDay(
-                  Helper().weekdayToString(DateTime.now().weekday),
-                );
+            context.read<ChooseDayCubit>().chooseDay(DateTime.now().weekday);
           },
           icon: const Icon(CupertinoIcons.arrow_left),
         ),
@@ -81,8 +79,9 @@ class _SchedulePageState extends State<SchedulePage> {
                 width: double.maxFinite,
                 height: 54,
                 color: const Color(0xFF442C79),
-                child: BlocBuilder<ChooseDayCubit, String>(
+                child: BlocBuilder<ChooseDayCubit, int>(
                   builder: (context, state) {
+                    print(state);
                     return ListView.builder(
                       controller: _controller,
                       scrollDirection: Axis.horizontal,
@@ -92,11 +91,10 @@ class _SchedulePageState extends State<SchedulePage> {
                       itemBuilder: (context, i) => DayPill(
                         data: days[i],
                         position: i,
-                        isActive: state == days[i].toLowerCase(),
+                        isActive: state - 1 == i,
                         onTap: () {
-                          context
-                              .read<ChooseDayCubit>()
-                              .chooseDay(days[i].toLowerCase());
+                          context.read<ChooseDayCubit>().chooseDay(
+                              Helper().stringToWeekDay(days[i].toLowerCase()));
                         },
                       ),
                     );
@@ -118,13 +116,13 @@ class _SchedulePageState extends State<SchedulePage> {
                   }
                 }
               }, builder: (context, state) {
-                return BlocBuilder<ChooseDayCubit, String>(
+                return BlocBuilder<ChooseDayCubit, int>(
                   builder: (context, day) {
                     var data = [];
                     if (state is ScheduleSuccess) {
                       data = state.data
                           .where((element) =>
-                              element.hari!.toLowerCase() ==
+                              element.idHari ==
                               context.read<ChooseDayCubit>().state)
                           .toList();
                     } else if (state is ScheduleLoading) {
@@ -171,7 +169,8 @@ class _SchedulePageState extends State<SchedulePage> {
                               ),
                             ],
                           ),
-                          child: const NoScheduleWidget(),
+                          child: NoScheduleWidget(
+                              day: context.read<ChooseDayCubit>().state),
                         ),
                       );
                     }

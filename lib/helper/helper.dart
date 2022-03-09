@@ -47,4 +47,25 @@ class Helper {
         return 'senin';
     }
   }
+
+  int stringToWeekDay(String day) {
+    switch (day) {
+      case 'senin':
+        return 1;
+      case 'selasa':
+        return 2;
+      case 'rabu':
+        return 3;
+      case 'kamis':
+        return 4;
+      case 'jumat':
+        return 5;
+      case 'sabtu':
+        return 6;
+      case 'minggu':
+        return 7;
+      default:
+        return 1;
+    }
+  }
 }
