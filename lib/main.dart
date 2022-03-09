@@ -49,13 +49,15 @@ void periodicTask() async {
   await Hive.openBox('app_config');
   var box = await Hive.openBox('credentials');
 
-  String npm = box.get('npm');
-  String password = box.get('password');
+  var npm = box.get('npm');
+  var password = box.get('password');
 
-  Timer.periodic(const Duration(hours: 1), (timer) {
-    AuthRepository(Dio()).login(npm, password);
-    AuthRepository(Dio()).loginPresensi(npm, password);
-  });
+  if (npm != null && password != null) {
+    Timer.periodic(const Duration(hours: 1), (timer) {
+      AuthRepository(Dio()).login(npm, password);
+      AuthRepository(Dio()).loginPresensi(npm, password);
+    });
+  }
 }
 
 void registerAdapters() {

@@ -22,25 +22,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     // open hive box
     var box = await Hive.openBox('app_config');
 
-    log(isOnline.toString());
+    await ProfileRepository(Dio()).get();
 
-    if (isOnline) {
-      // get profile from remote data
-      var repository = await ProfileRepository(Dio()).get();
-
-      repository.fold(
-        (err) {
-          emit(ProfileError(err));
-        },
-        (data) {
-          log(data.toString());
-          emit(ProfileSuccess(data));
-        },
-      );
-    } else {
-      // get profile data from local
-      ProfileModel data = await box.get('profile_data');
-      emit(ProfileSuccess(data));
-    }
+    // get profile data from local
+    ProfileModel data = await box.get('profile_data');
+    emit(ProfileSuccess(data));
   }
 }

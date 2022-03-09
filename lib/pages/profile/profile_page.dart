@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+
 import '../../cubit/auth/auth_cubit.dart';
 import '../../cubit/profile/action/profile_action_cubit.dart';
 import '../../cubit/profile/mahasiswa/profile_cubit.dart';
@@ -75,7 +77,7 @@ class ProfilePage extends StatelessWidget {
                                     shape: BoxShape.circle,
                                     color: Colors.grey.shade300,
                                     image: DecorationImage(
-                                        image: NetworkImage(
+                                        image: CachedNetworkImageProvider(
                                             state.data.mhs!.npmImg!),
                                         fit: BoxFit.cover),
                                   ),
@@ -143,6 +145,7 @@ class ProfilePage extends StatelessWidget {
                   const SizedBox(height: 32),
                   Container(
                     width: double.maxFinite,
+                    clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(4),
                       color: Colors.white,
@@ -198,6 +201,51 @@ class ProfilePage extends StatelessWidget {
                                   : '',
                             );
                           },
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  Container(
+                    width: double.maxFinite,
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF686B6D).withOpacity(0.1),
+                          offset: const Offset(5, 5),
+                          blurRadius: 19,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: double.maxFinite,
+                          padding: const EdgeInsets.all(24),
+                          color: const Color(0xFFF2F8FD),
+                          child: const Text(
+                            'Aplikasi',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xFF756D8D),
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        const ProfileItem(
+                          icon: FeatherIcons.moon,
+                          title: 'Darkmode',
+                          data: 'Mati',
+                        ),
+                        const ProfileItem(
+                          icon: FeatherIcons.info,
+                          title: 'Tentang Aplikasi',
+                          data: 'Mati',
                         ),
                       ],
                     ),

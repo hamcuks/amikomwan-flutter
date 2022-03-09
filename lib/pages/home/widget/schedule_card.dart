@@ -32,6 +32,7 @@ class ScheduleCard extends StatelessWidget {
         bottom: 20,
       ),
       child: Container(
+        clipBehavior: Clip.hardEdge,
         width: length == 1
             ? MediaQuery.of(context).size.width * .85
             : MediaQuery.of(context).size.width * .6,

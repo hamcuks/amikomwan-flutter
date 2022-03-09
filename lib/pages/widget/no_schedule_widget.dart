@@ -19,7 +19,7 @@ class NoScheduleWidget extends StatelessWidget {
         Lottie.asset('assets/json/warning.json', width: 54),
         const SizedBox(height: 8),
         Text(
-            'Hari ${Helper().toUpperCamelCase(Helper().weekdayToString(day ?? DateTime.now().weekday))} gada kuliah Bor!'),
+            'Hari ${Helper().toUpperCamelCase(Helper().weekdayToString(day ?? DateTime.now().weekday))} gada kuliah bor!'),
       ],
     );
   }
