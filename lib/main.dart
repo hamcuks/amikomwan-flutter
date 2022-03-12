@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amikom_wan/pages/pages.dart';
 import 'package:dio/dio.dart';
 
 import 'cubit/auth/auth_cubit.dart';
@@ -14,29 +15,17 @@ import 'cubit/schedule/action/choose_day/choose_day_cubit.dart';
 import 'cubit/schedule/schedule_cubit.dart';
 import 'cubit/splash/splash_cubit.dart';
 import 'cubit/transkrip/transkrip_cubit.dart';
-import 'data/model/khs/akademik/akademik_model.dart';
-import 'data/model/profile/profile_model.dart';
-import 'data/model/schedule/schedule_model.dart';
-import 'data/repository/auth/auth_repository.dart';
-import 'pages/ktm/ktm_page.dart';
+import 'data/model/models.dart';
+import 'data/repository/repositories.dart';
 import 'pages/presensi/data/data_presensi_page.dart';
-import 'pages/presensi/presensi_page.dart';
-import 'pages/presensi/presensi_result_page.dart';
 import 'pages/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'cubit/khs/action/akademik/akademik_cubit.dart';
 import 'cubit/profile/mahasiswa/profile_cubit.dart';
-import 'pages/home/home_page.dart';
-import 'pages/khs/khs_page.dart';
-import 'pages/profile/profile_page.dart';
-import 'pages/transkrip/transkrip_page.dart';
 import 'routes.dart';
 import 'package:flutter/material.dart';
-
-import 'pages/login/login_page.dart';
-import 'pages/schedule/schedule_page.dart';
 
 void main() async {
   await Hive.initFlutter();

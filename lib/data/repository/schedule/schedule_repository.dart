@@ -1,11 +1,4 @@
-import 'dart:developer';
-
-import '../../../common/constant.dart';
-import '../../model/schedule/schedule_model.dart';
-import '../../../helper/helper.dart';
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:hive/hive.dart';
+part of '../repositories.dart';
 
 class ScheduleRepository {
   Dio? dio;

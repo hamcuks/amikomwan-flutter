@@ -1,8 +1,4 @@
-import '../../cubit/ktm/ktm_cubit.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
+part of '../pages.dart';
 
 class KTMPage extends StatelessWidget {
   const KTMPage({Key? key}) : super(key: key);

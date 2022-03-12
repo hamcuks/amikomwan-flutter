@@ -1,12 +1,4 @@
-import 'dart:developer';
-
-import '../../../common/constant.dart';
-import '../../model/khs/akademik/akademik_model.dart';
-import '../../model/khs/khs_model.dart';
-import '../../../helper/helper.dart';
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+part of '../repositories.dart';
 
 class KHSRepository {
   Dio? dio;

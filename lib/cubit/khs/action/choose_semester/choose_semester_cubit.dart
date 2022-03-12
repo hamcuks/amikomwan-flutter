@@ -1,6 +1,7 @@
-import '../../../../data/model/profile/profile_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../../data/model/models.dart';
 
 class ChooseSemesterCubit extends Cubit<int> {
   ChooseSemesterCubit() : super(1);

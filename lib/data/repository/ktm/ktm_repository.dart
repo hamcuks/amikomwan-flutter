@@ -1,12 +1,4 @@
-import 'dart:developer';
-
-import '../../model/ktm/ktm_model.dart';
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:hive/hive.dart';
-
-import '../../../common/constant.dart';
-import '../../../helper/helper.dart';
+part of '../repositories.dart';
 
 class KtmRepository {
   final Dio? dio;

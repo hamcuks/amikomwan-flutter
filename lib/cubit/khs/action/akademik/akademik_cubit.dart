@@ -1,11 +1,12 @@
 import 'dart:developer';
 
-import '../../../../data/model/khs/akademik/akademik_model.dart';
-import '../../../../data/repository/khs/khs_repository.dart';
+import '../../../../data/model/models.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../../data/repository/repositories.dart';
 
 part 'akademik_state.dart';
 

@@ -1,18 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
-
-import '../../cubit/auth/auth_cubit.dart';
-import '../../cubit/profile/action/profile_action_cubit.dart';
-import '../../cubit/profile/mahasiswa/profile_cubit.dart';
-import '../../helper/helper.dart';
-import '../widget/app_button.dart';
-import '../../routes.dart';
-import 'package:feather_icons/feather_icons.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
-
-import 'widget/profile_item_widget.dart';
+part of '../pages.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);

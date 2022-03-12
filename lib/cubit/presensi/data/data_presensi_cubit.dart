@@ -1,8 +1,9 @@
-import '../../../data/model/auth/presensi/data_presensi_model.dart';
-import '../../../data/repository/presensi/presensi_repository.dart';
+import '../../../data/model/models.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../data/repository/repositories.dart';
 
 part 'data_presensi_state.dart';
 

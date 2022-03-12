@@ -1,14 +1,4 @@
-import 'dart:developer';
-
-import '../../cubit/khs/khs_cubit.dart';
-import '../../data/model/khs/akademik/akademik_model.dart';
-import '../widget/app_drop_down.dart';
-import '../../cubit/khs/action/akademik/akademik_cubit.dart';
-import '../widget/mata_kuliah_detail_widget.dart';
-import '../widget/gpa_summary_widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+part of '../pages.dart';
 
 class KHSPage extends StatelessWidget {
   KHSPage({Key? key}) : super(key: key);
@@ -121,34 +111,6 @@ class KHSPage extends StatelessWidget {
       ),
     );
   }
-
-  // Container _buildEmptyData() {
-  //   return Container(
-  //     width: double.maxFinite,
-  //     margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-  //     clipBehavior: Clip.antiAlias,
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(4),
-  //       color: Colors.white,
-  //       boxShadow: [
-  //         BoxShadow(
-  //           color: const Color(0xFF686B6D).withOpacity(0.1),
-  //           offset: const Offset(5, 5),
-  //           blurRadius: 19,
-  //           spreadRadius: 2,
-  //         ),
-  //       ],
-  //     ),
-  //     child: Column(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: [
-  //         Lottie.asset('assets/json/warning.json', width: 72),
-  //         const SizedBox(height: 8),
-  //         const Text('Tidak Ada Data Matakuliah'),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   ListView _buildListMataKuliah(KhsState state) {
     return ListView.builder(

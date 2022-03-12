@@ -1,11 +1,12 @@
 import 'dart:developer';
 
-import '../../data/model/transkrip/transkrip_model.dart';
-import '../../data/repository/transkrip/transkrip_repository.dart';
+import '../../data/model/models.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+
+import '../../data/repository/repositories.dart';
 
 part 'transkrip_state.dart';
 

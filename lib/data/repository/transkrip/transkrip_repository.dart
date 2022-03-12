@@ -1,10 +1,4 @@
-import 'dart:developer';
-
-import '../../../common/constant.dart';
-import '../../model/transkrip/transkrip_model.dart';
-import '../../../helper/helper.dart';
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+part of '../repositories.dart';
 
 class TranskripRepository {
   Dio? dio;

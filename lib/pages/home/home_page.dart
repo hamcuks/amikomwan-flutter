@@ -1,22 +1,4 @@
-import '../../cubit/khs/khs_cubit.dart';
-import '../../cubit/profile/mahasiswa/profile_cubit.dart';
-import '../../cubit/schedule/schedule_cubit.dart';
-import '../../data/model/schedule/schedule_model.dart';
-import 'widget/live_class_card.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:shimmer/shimmer.dart';
-
-import '../../cubit/schedule/action/choose_day/choose_day_cubit.dart';
-import '../../helper/helper.dart';
-import '../widget/app_menu_item.dart';
-import '../../routes.dart';
-import 'package:feather_icons/feather_icons.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-import '../widget/no_schedule_widget.dart';
-import 'widget/schedule_card.dart';
+part of '../pages.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

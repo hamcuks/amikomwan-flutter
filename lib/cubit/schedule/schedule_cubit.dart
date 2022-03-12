@@ -1,13 +1,10 @@
-import 'dart:developer';
-
-import '../../data/model/schedule/schedule_model.dart';
-import '../../data/repository/schedule/schedule_repository.dart';
+import '../../data/model/models.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../helper/helper.dart';
+import '../../data/repository/repositories.dart';
 
 part 'schedule_state.dart';
 

@@ -1,14 +1,4 @@
-import '../../cubit/schedule/action/choose_day/choose_day_cubit.dart';
-import '../../cubit/schedule/schedule_cubit.dart';
-import '../../helper/helper.dart';
-import '../widget/mata_kuliah_detail_widget.dart';
-import '../widget/no_schedule_widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-import 'widget/day_pill_widget.dart';
+part of '../pages.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -80,7 +70,6 @@ class _SchedulePageState extends State<SchedulePage> {
                 color: const Color(0xFF442C79),
                 child: BlocBuilder<ChooseDayCubit, int>(
                   builder: (context, state) {
-                    print(state);
                     return ListView.builder(
                       controller: _controller,
                       scrollDirection: Axis.horizontal,

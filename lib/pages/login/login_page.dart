@@ -1,12 +1,4 @@
-import '../../cubit/auth/auth_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-
-import '../widget/app_button.dart';
-import '../widget/app_form_field.dart';
-import '../../routes.dart';
-import 'package:feather_icons/feather_icons.dart';
-import 'package:flutter/material.dart';
+part of '../pages.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);

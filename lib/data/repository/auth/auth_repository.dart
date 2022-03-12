@@ -1,9 +1,4 @@
-import 'dart:developer';
-
-import '../../../common/constant.dart';
-import '../../model/auth/login_model.dart';
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
+part of '../repositories.dart';
 
 class AuthRepository {
   Dio? dio;

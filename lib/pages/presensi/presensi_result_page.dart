@@ -1,8 +1,4 @@
-import '../../cubit/presensi/send_qr/send_qr_cubit.dart';
-import '../../routes.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
+part of '../pages.dart';
 
 class PresensiResultPage extends StatelessWidget {
   const PresensiResultPage({Key? key}) : super(key: key);

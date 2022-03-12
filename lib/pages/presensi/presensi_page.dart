@@ -1,15 +1,4 @@
-import 'dart:developer';
-import 'dart:io';
-
-import 'package:lottie/lottie.dart';
-
-import '../../cubit/presensi/send_qr/send_qr_cubit.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-
-import '../../routes.dart';
+part of '../pages.dart';
 
 class PresensiPage extends StatefulWidget {
   const PresensiPage({Key? key}) : super(key: key);

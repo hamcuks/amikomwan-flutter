@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../data/repository/ktm/ktm_repository.dart';
+import '../../data/repository/repositories.dart';
 
 part 'ktm_state.dart';
 

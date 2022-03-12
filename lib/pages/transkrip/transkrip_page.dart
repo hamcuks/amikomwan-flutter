@@ -1,11 +1,4 @@
-import '../../cubit/transkrip/transkrip_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../widget/mata_kuliah_detail_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-import '../widget/gpa_summary_widget.dart';
+part of '../pages.dart';
 
 class TranskripPage extends StatelessWidget {
   const TranskripPage({Key? key}) : super(key: key);

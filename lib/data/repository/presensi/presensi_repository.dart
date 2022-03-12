@@ -1,12 +1,4 @@
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
-import '../../../common/constant.dart';
-import '../../../helper/helper.dart';
-import '../../model/auth/presensi/data_presensi_model.dart';
+part of '../repositories.dart';
 
 class PresensiRepository {
   Dio? dio;

@@ -1,7 +1,8 @@
-import '../../../data/repository/presensi/presensi_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../data/repository/repositories.dart';
 
 part 'send_qr_state.dart';
 

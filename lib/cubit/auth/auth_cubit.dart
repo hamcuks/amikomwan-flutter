@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import '../../data/repository/auth/auth_repository.dart';
+import '../../data/repository/repositories.dart';
 import '../../helper/helper.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';

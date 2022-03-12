@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../data/model/khs/khs_model.dart';
-import '../../data/repository/khs/khs_repository.dart';
+import '../../data/model/models.dart';
+import '../../data/repository/repositories.dart';
 
 part 'khs_state.dart';
 
