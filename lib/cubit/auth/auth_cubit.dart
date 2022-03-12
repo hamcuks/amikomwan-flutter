@@ -24,13 +24,13 @@ class AuthCubit extends Cubit<AuthState> {
         log(err);
       },
       (data) {
-        emit(AuthSuccess());
         Helper().setToken('access', data.accessToken!);
         box.put('npm', npm);
         box.put('password', password);
         box.put('isLoggedIn', true);
 
         log(data.accessToken.toString(), name: 'login');
+        emit(AuthSuccess());
       },
     );
   }
