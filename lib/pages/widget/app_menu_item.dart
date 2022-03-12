@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+part of 'widgets.dart';
+
 
 class AppMenuItem extends StatelessWidget {
   final String menuName;

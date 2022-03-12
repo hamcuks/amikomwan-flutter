@@ -1,6 +1,4 @@
-import '../../helper/helper.dart';
-import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
+part of 'widgets.dart';
 
 class MataKuliahDetail extends StatelessWidget {
   final dynamic data;

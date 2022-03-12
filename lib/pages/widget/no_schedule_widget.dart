@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-
-import '../../helper/helper.dart';
+part of 'widgets.dart';
 
 class NoScheduleWidget extends StatelessWidget {
   final int? day;

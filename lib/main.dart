@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:amikom_wan/pages/pages.dart';
+import 'pages/pages.dart';
 import 'package:dio/dio.dart';
 
 import 'cubit/auth/auth_cubit.dart';
@@ -17,7 +17,6 @@ import 'cubit/splash/splash_cubit.dart';
 import 'cubit/transkrip/transkrip_cubit.dart';
 import 'data/model/models.dart';
 import 'data/repository/repositories.dart';
-import 'pages/presensi/data/data_presensi_page.dart';
 import 'pages/splash_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';

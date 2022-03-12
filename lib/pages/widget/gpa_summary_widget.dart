@@ -1,9 +1,4 @@
-import '../../cubit/gpa_summary/gpa_summary_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:wave/config.dart';
-import 'package:wave/wave.dart';
+part of 'widgets.dart';
 
 class GPASummary extends StatelessWidget {
   final dynamic data;
@@ -16,9 +11,6 @@ class GPASummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context
-        .watch<GpaSummaryCubit>()
-        .getGPALevel(isKHS ? data?.ipkSem ?? 0.0 : data?.ipk ?? 0.0);
     return Stack(
       children: [
         Container(
@@ -48,6 +40,9 @@ class GPASummary extends StatelessWidget {
                   child: Stack(
                     children: [
                       BlocBuilder<GpaSummaryCubit, GpaLevelModel>(
+                        bloc: GpaSummaryCubit()
+                          ..getGPALevel(
+                              isKHS ? data?.ipkSem ?? 0.0 : data?.ipk ?? 0.0),
                         builder: (context, state) {
                           return Container(
                             clipBehavior: Clip.hardEdge,

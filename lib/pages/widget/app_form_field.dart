@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'widgets.dart';
 
 class AppFormField extends StatefulWidget {
   final String hintText;

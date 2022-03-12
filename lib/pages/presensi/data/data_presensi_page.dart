@@ -1,8 +1,4 @@
-import '../../../cubit/presensi/data/data_presensi_cubit.dart';
-import '../../widget/mata_kuliah_detail_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+part of '../../pages.dart';
 
 class DataPresensiPage extends StatelessWidget {
   const DataPresensiPage({Key? key}) : super(key: key);
