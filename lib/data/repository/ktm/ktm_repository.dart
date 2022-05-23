@@ -17,8 +17,7 @@ class KtmRepository {
       contentType: Headers.formUrlEncodedContentType,
       headers: {
         'User-Agent': '@m!k0mXv=#neMob!le',
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ByaW1hcnlzaWQiOiIxOS4xMS4yNzQyIiwianRpIjoiMmY5ZTE0NDMtYWRmNy00ZWM1LWFkM2MtZDZmYTkyNTFkOTBiIiwiaWF0IjoxNjUzMzIxNTUyLCJuYmYiOjE2NTMzMjE1NTIsImV4cCI6MTY1MzMzOTU1Mn0.onEkeJMN0UHAspXXjL4Fzhy9AVg-6thb3bi1qS9Qga8',
+        'Authorization': 'Bearer $token',
       },
     );
     print(token);
