@@ -296,7 +296,13 @@ class _AppMenuSection extends StatelessWidget {
                   menuName: 'KTM',
                   icon: FeatherIcons.creditCard,
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.ktm);
+                    // Navigator.pushNamed(context, Routes.ktm);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Fitur KTM sedang maintenance'),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
                   },
                 ),
               ],
