@@ -20,6 +20,7 @@ class KtmRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    print(token);
     try {
       Response response = await dio!.get(
         'https://ds.amikom.ac.id/api/amikomone/mahasiswa/$npm/ktm_digital?lang_id=id',
@@ -33,11 +34,9 @@ class KtmRepository {
       KtmModel data = KtmModel.fromJson(response.data);
 
       box.put('ktmImage', data.result!.hash);
-
       return right(data);
     } on DioError catch (e) {
       log(e.message);
-
       switch (e.type) {
         case DioErrorType.connectTimeout:
           return left('Gagal Login, Pastikan Terkoneksi ke Internet');

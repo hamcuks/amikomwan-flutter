@@ -16,9 +16,13 @@ class ScheduleCubit extends Cubit<ScheduleState> {
 
     // open hive box
     var box = await Hive.openBox('app_config');
+    var credentialsBox = await Hive.openBox('credentials');
+
+    // npm
+    var npm = credentialsBox.get('npm');
 
     // get schedule from remote data
-    await ScheduleRepository(Dio()).get('19.11.2742');
+    await ScheduleRepository(Dio()).get(npm ?? '');
 
     // get schedule from local data
     List<ScheduleModel> data =
