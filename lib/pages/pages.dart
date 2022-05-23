@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 import '../cubit/cubits.dart';
 import '../data/model/models.dart';

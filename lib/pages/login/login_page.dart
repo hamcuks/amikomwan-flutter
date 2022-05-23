@@ -64,24 +64,26 @@ class LoginPage extends StatelessWidget {
                               onPressed: () async {
                                 var box = await Hive.openBox('credentials');
                                 String npm = await box.get('npm') ?? '';
-                                if (_formKey.currentState!.validate()) {
-                                  if (npm.isNotEmpty &&
-                                      npm != _npmController.text) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                            'Aplikasi hanya bisa digunakan untuk satu NIM'),
-                                      ),
-                                    );
-                                  } else {
-                                    context.read<AuthCubit>().login(
-                                        _npmController.text,
-                                        _passwordController.text);
-                                    context.read<AuthCubit>().authPresensi(
-                                        _npmController.text,
-                                        _passwordController.text);
-                                  }
-                                }
+                                // if (_formKey.currentState!.validate()) {
+                                //   if (npm.isNotEmpty &&
+                                //       npm != _npmController.text) {
+                                //     ScaffoldMessenger.of(context).showSnackBar(
+                                //       const SnackBar(
+                                //         content: Text(
+                                //             'Aplikasi hanya bisa digunakan untuk satu NIM'),
+                                //       ),
+                                //     );
+                                //   } else {
+                                //     context.read<AuthCubit>().login(
+                                //         _npmController.text,
+                                //         _passwordController.text);
+                                //     context.read<AuthCubit>().authPresensi(
+                                //         _npmController.text,
+                                //         _passwordController.text);
+                                //   }
+                                // }
+
+                                Helper().getDeviceId();
                               },
                             );
                           }

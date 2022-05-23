@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class Helper {
@@ -9,7 +12,7 @@ class Helper {
 
   Future<String> getToken(String key) async {
     var box = await Hive.openBox('credentials');
-    return await box.get("${key}_token");
+    return await box.get("${key}_token") ?? '';
   }
 
   String toUpperCamelCase(String val) => val
@@ -67,5 +70,25 @@ class Helper {
       default:
         return 1;
     }
+  }
+
+  Future<String> getDeviceId() async {
+    final DeviceInfoPlugin _device = DeviceInfoPlugin();
+
+    String deviceId = '';
+
+    if (Platform.isIOS) {
+      IosDeviceInfo _platform = await _device.iosInfo;
+      print(_platform.identifierForVendor);
+      deviceId = _platform.identifierForVendor!;
+    }
+
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo _platform = await _device.androidInfo;
+      print(_platform.androidId);
+      deviceId = _platform.androidId!;
+    }
+
+    return deviceId;
   }
 }
